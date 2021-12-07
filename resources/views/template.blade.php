@@ -301,6 +301,23 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     </ul>
                     @endif
 
+                    @if (get_action_icons('category', 'get'))
+                    <ul class="nav nav-list">
+                        <li id="category">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="glyphicon glyphicon-folder-open"></i>
+                                <span>@lang('messages.Category.Category')</span>
+                                <b class="arrow fa fa-angle-right"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li id="category_index"><a href="{{url('category')}}">@lang('messages.Category.Category')</a></li>
+                                <li id="category_create"><a href="{{url('category/create')}}">@lang('messages.Category.Create Category')</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    @endif
+
                     @if (get_action_icons('country', 'get'))
                     <ul class="nav nav-list">
                         <li id="country">
