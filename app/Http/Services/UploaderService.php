@@ -22,7 +22,7 @@ class UploaderService
     public function creatOurFolderPath($folder)
     {
         $date_path = date("Y") . '-' . date("m") . '-' . date("d") . '/';
-        $path =  base_path().'/safir/public/uploads/'.$folder.'/' . $date_path;
+        $path =  base_path().'/uploads/'.$folder.'/' . $date_path;
 
         if (!File::exists($path)) {
             File::makeDirectory($path, 0777, true);
@@ -46,7 +46,7 @@ class UploaderService
         $file_name = time().'.'.$file->getClientOriginalExtension();
 
         if ($file->move($ourPath['path'], $file_name)) {
-            return 'uploads/'.$folder.'/'.$ourPath['date_path'].$file_name;
+            return 'safir/public/uploads/'.$folder.'/'.$ourPath['date_path'].$file_name;
         }
     }
 }
