@@ -22,7 +22,7 @@ class UploaderService
     public function creatOurFolderPath($folder)
     {
         $date_path = date("Y") . '-' . date("m") . '-' . date("d") . '/';
-        $path =  base_path().'/uploads/'.$folder.'/' . $date_path;
+        $path =  base_path().'/safir/public/uploads/'.$folder.'/' . $date_path;
 
         if (!File::exists($path)) {
             File::makeDirectory($path, 0777, true);
