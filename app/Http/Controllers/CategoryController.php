@@ -76,7 +76,6 @@ class CategoryController extends Controller
     public function allData(Request $request)
     {
         $categorys = $this->categoryRepository
-            ->withCount(['contents', 'sub_cats'])
             ->filter($this->categoryFilter());
 
         if (!$request->filled("parent_id")) {
