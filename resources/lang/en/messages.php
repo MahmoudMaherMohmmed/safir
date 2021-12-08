@@ -384,8 +384,8 @@ return [
     ],
 
     'centers'=>[
-        'centers' => 'Centers',
-        'create_center' => 'Add New Center',
+        'centers' => 'Safer',
+        'create_center' => 'Update Safer',
         'emails' => 'Emails',
         'email' => 'Email',
         'contact_email' => 'Contact Email',

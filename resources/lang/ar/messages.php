@@ -378,8 +378,8 @@ return [
     ],
 
     'centers'=>[
-        'centers' => 'المراكز',
-        'create_center' => 'اضافة مركز جديد',
+        'centers' => 'سافر',
+        'create_center' => 'تعديل سافر',
         'emails' => 'ايميلات',
         'email' => 'ايميل',
         'contact_email' => 'ايميل الاتصال',
