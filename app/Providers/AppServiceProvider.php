@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Observers\PostObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Config;
+use Session;
 class AppServiceProvider extends ServiceProvider
 {
     /**
