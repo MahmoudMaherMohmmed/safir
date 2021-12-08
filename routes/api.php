@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', 'Api\ClientController@login');
 Route::post('register', 'Api\ClientController@register');
+Route::get('center', 'Api\AppController@center');
+Route::get('terms_and_conditions', 'Api\AppController@TermsAndConditions');
+Route::post('contact_email', 'Api\AppController@contactMail');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('profile', 'Api\ClientController@profile');
@@ -31,9 +34,4 @@ Route::middleware('auth:api')->group(function () {
     route::post('client/reservation', 'Api\AppointmentController@clientReservations');
     Route::post('messages', 'Api\MessageController@index');
     Route::post('message/create', 'Api\MessageController@create');
-
-    Route::get('about_massara', 'Api\AppController@aboutMassara');
-    Route::get('center', 'Api\AppController@center');
-    Route::get('terms_and_conditions', 'Api\AppController@TermsAndConditions');
-    Route::post('contact_email', 'Api\AppController@contactMail');
 });
