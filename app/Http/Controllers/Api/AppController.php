@@ -12,21 +12,6 @@ use Mail;
 
 class AppController extends Controller
 {
-
-    public function aboutMassara(Request $request){
-        $massara = Massara::first();
-        $about_massara = [];
-        $lang = $request->lang;
-
-        if(isset($massara) && $massara!=null){
-            $about_massara = [
-                'description' => isset($lang) && $lang!=null ? $massara->getTranslation('description', $lang) : $massara->description,
-            ];
-        }
-
-        return response()->json(['massara' => $about_massara], 200);
-    }
-
     public function center(Request $request){
         $center = Center::first();
         $center_info = [];
