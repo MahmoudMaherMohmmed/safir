@@ -1,6 +1,6 @@
 <td class="visible-md visible-lg">
     <div class="btn-group">
-        @if (get_action_icons('content/create', 'get'))
+        <!-- @if (get_action_icons('content/create', 'get'))
             <a class="btn btn-sm btn-success show-tooltip" title="Add Content"
                 href="{{ url('content/create?category_id=' . $value->id) }}"
                 data-original-title="Add Content"><i class="fa fa-plus"></i></a>
@@ -11,7 +11,7 @@
                     href="{{ url('content?category_id=' . $value->id) }}" data-original-title="show Content"><i
                         class="fa fa-step-forward"></i></a>
             @endif
-        @endif
+        @endif -->
         @if (get_action_icons('category/{id}/edit', 'get'))
             <a class="btn btn-sm show-tooltip" href="{{ url("category/$value->id/edit") }}" title="Edit"><i
                     class="fa fa-edit"></i></a>
