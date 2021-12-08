@@ -24,6 +24,7 @@ Route::post('register', 'Api\ClientController@register');
 Route::get('center', 'Api\AppController@center');
 Route::get('terms_and_conditions', 'Api\AppController@TermsAndConditions');
 Route::post('contact_email', 'Api\AppController@contactMail');
+Route::get('categories', 'Api\CategoryController@index');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('profile', 'Api\ClientController@profile');
