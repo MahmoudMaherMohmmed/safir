@@ -24,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
         //         );
         //     });
         // }
+
+        if (array_key_exists('ar', Config::get('languages'))) {
+            Session::put('applocale', 'ar');
+        }
     }
 
     /**

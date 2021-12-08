@@ -77,8 +77,16 @@ trait Translatable {
                 $trans = HasTranslation::where('table_name', $this->table)->where('record_id', $this->id)->where('column_name', $key_)->first();
                 if ($trans) {
                     $has_body = HasBody::where('language_id', $language_id)->where('translatable_id', $trans->id)->first();
-                    $has_body->body = $value_;
-                    $has_body->save();
+                    if(isset($has_body) && $has_body!=null){
+                        $has_body->body = $value_;
+                        $has_body->save();
+                    }else{
+                        $has_body = new HasBody();
+                        $has_body->language_id = $language_id;
+                        $has_body->translatable_id = $trans->id;
+                        $has_body->body = $value_;
+                        $has_body->save();
+                    }
                 } else {
                     $trans = new HasTranslation();
                     $trans->table_name = $this->table;
