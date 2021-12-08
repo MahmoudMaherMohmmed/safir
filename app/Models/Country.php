@@ -3,13 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Translatable;
 
 class Country extends Model
 {
+    use Translatable;
+    
     protected $fillable = ['title'];
 
-    public function operator()
+    public function trips()
     {
-      return $this->hasMany('App\Models\Operator','operator_id','id');
+      return $this->hasMany(Trip::class);
     }
 }

@@ -22,6 +22,7 @@ class CreateTripsTable extends Migration
 			$table->string('image');
             $table->integer('category_id')->unsigned();
             $table->integer('country_id')->unsigned();
+            $table->integer('status')->default(0);
 
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign('country_id')->references('id')->on('countries')->onUpdate('CASCADE')->onDelete('CASCADE');

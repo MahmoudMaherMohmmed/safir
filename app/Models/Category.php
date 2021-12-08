@@ -26,11 +26,6 @@ class Category extends Model
         return $builder->whereNull('parent_id');
     }
 
-    public function contents()
-    {
-        return $this->hasMany('App\Models\Content', 'category_id', 'id');
-    }
-
     public function sub_cats()
     {
         return $this->hasMany('App\Models\Category', 'parent_id', 'id');
