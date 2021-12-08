@@ -396,8 +396,8 @@ return [
     ],
 
     'massara'=>[
-        'massara_about' => 'عن مسرة',
-        'create_massara' => 'تعديل مسرة',
+        'massara_about' => 'عن سافر',
+        'create_massara' => 'تعديل سافر',
     ],
 
     'messages'=>[

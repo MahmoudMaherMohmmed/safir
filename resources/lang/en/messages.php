@@ -402,8 +402,8 @@ return [
     ],
 
     'massara'=>[
-        'massara_about' => 'About Massara',
-        'create_massara' => 'Massara Create',
+        'massara_about' => 'About Safer',
+        'create_massara' => 'Safer Create',
     ],
 
     'messages'=>[
