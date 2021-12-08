@@ -12,10 +12,10 @@
                 </div>
                 <div class="box-content">
                     @if($massara)
-                    {!! Form::model($massara,["url"=>"massara/$massara->id","class"=>"form-horizontal","method"=>"patch","files"=>"True"]) !!}
+                    {!! Form::model($massara,["url"=>"safer/$massara->id","class"=>"form-horizontal","method"=>"patch","files"=>"True"]) !!}
                     @include('massara.input',['buttonAction'=>''.\Lang::get("messages.Edit").'','required'=>'  (optional)'])
                     @else
-                    {!! Form::open(["url"=>"massara","class"=>"form-horizontal","method"=>"POST","files"=>"True"]) !!}
+                    {!! Form::open(["url"=>"safer","class"=>"form-horizontal","method"=>"POST","files"=>"True"]) !!}
                     @include('massara.input',['buttonAction'=>''.\Lang::get("messages.save").'','required'=>'  *'])
                     @endif
                     {!! Form::close() !!}
