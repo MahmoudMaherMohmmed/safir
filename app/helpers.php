@@ -97,7 +97,6 @@ function get_static_routes()
         Route::Resource('center', 'CenterController');
         Route::Resource('message', 'MessageController');
         Route::get('admin/get_client_messages/{client_id}', 'MessageController@clientMessages');
-        Route::Resource('safer', 'MassaraController');
         Route::Resource('term', 'TermController');
     });
 

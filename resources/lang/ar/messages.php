@@ -395,11 +395,6 @@ return [
         'lng' => 'Lng',
     ],
 
-    'massara'=>[
-        'massara_about' => 'عن سافر',
-        'create_massara' => 'تعديل سافر',
-    ],
-
     'messages'=>[
         'messages' => 'الرسايل',
     ],

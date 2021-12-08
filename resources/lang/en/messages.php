@@ -401,11 +401,6 @@ return [
         'lng' => 'Lng',
     ],
 
-    'massara'=>[
-        'massara_about' => 'About Safer',
-        'create_massara' => 'Safer Create',
-    ],
-
     'messages'=>[
         'messages' => 'Messages',
     ],

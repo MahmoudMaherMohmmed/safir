@@ -378,7 +378,6 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             <!-- BEGIN Submenu -->
                             <ul class="submenu">
                                 <li id="center_index"><a href="{{url('center')}}">@lang('messages.centers.centers')</a></li>
-                                <li id="massara_index"><a href="{{url('safer')}}">@lang('messages.massara.massara_about')</a></li>
                                 <li id="term_index"><a href="{{url('term')}}">@lang('messages.terms_conditions.terms_conditions')</a></li>
                             </ul>
                         </li>
