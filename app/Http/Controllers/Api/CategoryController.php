@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Trip;
+use App\Models\Country;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 
 class CategoryController extends Controller
 {
@@ -12,7 +16,7 @@ class CategoryController extends Controller
     {
         $categories = $this->formatCategories(Category::get(), $request->lang);
 
-        return response()->json(['categories' => $categories]);
+        return response()->json(['categories' => $categories], 200);
     }
 
     private function formatCategories($categories, $lang){
@@ -27,5 +31,53 @@ class CategoryController extends Controller
         }
 
         return $categories_array;
+    }
+
+    public function categoryTrips(Request $request, $category_id)
+    {
+        $countries_trips = [];
+        $lang = $request->lang;
+        $countries = Trip::where('category_id', $category_id)
+                        ->groupBy('country_id')
+                        ->pluck('country_id');
+
+        if(isset($countries) && count($countries)>0){
+            foreach($countries as $country_id){
+                $country = Country::where('id', $country_id)->first();
+                array_push($countries_trips,[
+                    'id' => $country->id,
+                    'name' => isset($lang) && $lang!=null ? $country->getTranslation('title', $lang) : $country->title,
+                    'trips' => $this->formatCountryTrips($country->trips, $lang)
+                ]);
+            }
+        }
+
+        return response()->json(['countries_trips' => $countries_trips], 200);
+    }
+
+    private function formatCountryTrips($trips, $lang)
+    {
+        $trips_array = [];
+
+        foreach($trips as $trip){
+            array_push($trips_array, [
+                'trip_id' => $trip->id,
+                'trip_title' => isset($lang) && $lang!=null ? $trip->getTranslation('name', $lang) : $trip->name,
+                'trip_description' => isset($lang) && $lang!=null ? $trip->getTranslation('description', $lang) : $trip->description,
+                'trip_price' => $trip->price,
+                'trip_start_date' => $trip->from,
+                'trip_end_date' => $trip->to,
+                'trip_duration' => $this->getTripDuration($trip->from, $trip->to),
+                'trip_persons_count' => $trip->persons_count,
+                'trip_image' => url($trip->image),
+            ]);
+        }
+
+        return $trips_array;
+    }
+
+    private function getTripDuration($start_date, $end_date)
+    {
+        return CarbonPeriod::create($start_date, $end_date)->count();
     }
 }

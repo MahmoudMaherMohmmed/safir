@@ -25,6 +25,7 @@ Route::get('center', 'Api\AppController@center');
 Route::get('terms_and_conditions', 'Api\AppController@TermsAndConditions');
 Route::post('contact_email', 'Api\AppController@contactMail');
 Route::get('categories', 'Api\CategoryController@index');
+Route::get('category/{category_id}/trips', 'Api\CategoryController@categoryTrips');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('profile', 'Api\ClientController@profile');
