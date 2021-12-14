@@ -131,8 +131,9 @@ class TripController extends Controller
     {
         $trip = Trip::findOrFail($id);
         $categories = Category::all();
+        $countries = Country::all();
         $languages = $this->languageRepository->all();
-        return view('trip.form', compact('trip', 'categories', 'languages'));
+        return view('trip.form', compact('trip', 'categories', 'countries', 'languages'));
     }
 
     /**

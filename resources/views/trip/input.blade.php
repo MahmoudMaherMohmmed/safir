@@ -45,14 +45,24 @@
 <div class="form-group">
     <label class="col-sm-3 col-lg-2 control-label">@lang('messages.trips.price') <span class="text-danger">*</span></label>
     <div class="col-sm-9 col-lg-10 controls">
-        <input type="number" class="form-control" name="price" value="@if ($trip) {!! $trip->price !!} @endif" />
+        <input type="text" class="form-control" name="price" value="@if ($trip) {{ $trip->price }} @endif" />
     </div>
 </div>
 
 <div class="form-group">
+    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.appointments.date') <span class="text-danger">*</span></label>
+    <div class="col-sm-4 col-lg-5 controls">
+        {!! Form::text('from',null,['placeholder'=>'From','class'=>'form-control js-datepicker' ,'value' => 'date("Y-m-d")' , 'autocomplete' => 'off' ]) !!}
+    </div>
+    <div class="col-sm-4 col-lg-5 controls">
+        {!! Form::text('to',null,['placeholder'=>'To','class'=>'form-control js-datepicker' ,'value' => 'date("Y-m-d")' , 'autocomplete' => 'off' ]) !!}
+    </div>
+</div> 
+
+<div class="form-group">
     <label class="col-sm-3 col-lg-2 control-label">@lang('messages.trips.persons_count') <span class="text-danger">*</span></label>
     <div class="col-sm-9 col-lg-10 controls">
-        <input type="number" class="form-control" name="persons_count" value="@if ($trip) {!! $trip->persons_count !!} @endif" />
+        <input type="text" class="form-control" name="persons_count" value="@if ($trip) {{ $trip->persons_count }} @endif" />
     </div>
 </div>
 

@@ -18,6 +18,8 @@ class CreateTripsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('price');
+            $table->string('from');
+            $table->string('to');
             $table->string('persons_count');
 			$table->string('image');
             $table->integer('category_id')->unsigned();

@@ -11,7 +11,8 @@ class Trip extends Model
     use HasFactory;
     use Translatable;
 
-    protected $fillable = ['title', 'description', 'price', 'persons_count', 'image', 'category_id', 'country_id', 'status'];
+    protected $table = 'trips';
+    protected $fillable = ['title', 'description', 'price', 'persons_count', 'image', 'from', 'to', 'category_id', 'country_id', 'status'];
 
     public function country()
     {
