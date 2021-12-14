@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Trip;
 use App\Models\Category;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Http\Repository\LanguageRepository;
 use App\Http\Services\UploaderService;
@@ -51,9 +52,10 @@ class TripController extends Controller
     {
         $trip = null;
         $categories = Category::all();
+        $countries = Country::all();
         $languages = $this->languageRepository->all();
 
-        return view('trip.form', compact('trip', 'categories', 'languages'));
+        return view('trip.form', compact('trip', 'categories', 'countries', 'languages'));
     }
 
     /**

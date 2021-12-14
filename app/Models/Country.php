@@ -9,6 +9,8 @@ class Country extends Model
 {
     use Translatable;
     
+    protected $table = 'countries';
+
     protected $fillable = ['title'];
 
     public function trips()

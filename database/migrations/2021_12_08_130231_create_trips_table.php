@@ -16,7 +16,7 @@ class CreateTripsTable extends Migration
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('descrription');
+            $table->string('description');
             $table->string('price');
             $table->string('persons_count');
 			$table->string('image');

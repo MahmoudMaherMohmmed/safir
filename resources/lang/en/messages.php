@@ -383,6 +383,15 @@ return [
         'create_client' => 'Add New Client',
     ],
 
+    'trips'=>[
+        'trips' => 'Trips',
+        'create_trip' => 'Add New Trip',
+        'categories' => 'Categories',
+        'countries' => 'Countries',
+        'price' => 'Price',
+        'persons_count' => 'Persons Count',
+    ],
+
     'centers'=>[
         'centers' => 'Safer',
         'create_center' => 'Update Safer',

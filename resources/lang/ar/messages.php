@@ -377,6 +377,15 @@ return [
         'create_client' => 'اضافة عميل جديد',
     ],
 
+    'trips'=>[
+        'trips' => 'الرحلات',
+        'create_trip' => 'اضافة رحلة جديد',
+        'categories' => 'الاقسام',
+        'countries' => 'الدول',
+        'price' => 'سعر الرحلة',
+        'persons_count' => 'عدد الافراد',
+    ],
+
     'centers'=>[
         'centers' => 'سافر',
         'create_center' => 'تعديل سافر',

@@ -40,34 +40,30 @@
                                         <th>@lang('messages.Title')</th>
                                         <th class="visible-md visible-lg" style="width:130px">@lang('messages.action')</th>
                                     </tr>
-                                </thead>
+                                </thead> 
                                 <tbody id="tablecontents">
                                     @foreach ($countrys as $country)
                                         <tr class="table-flag-blue">
                                             <td><input class="select_all_template" type="checkbox" name="selected_rows[]" value="{{ $country->id }}" ></td>
-                                            <td>{{ $country->title }}</td>
+                                            <td>
+                                                @foreach ($languages as $language)
+                                                    <li> <b>{{ $language->title }} :</b>
+                                                        {{ $country->getTranslation('title', $language->short_code) }}</li>
+                                                @endforeach
+                                            </td>
                                             <td class="visible-md visible-xs visible-sm visible-lg">
                                                 <div class="btn-group">
-                                                    @if (get_action_icons('operator/create', 'get'))
-
-                                                        <a class="btn btn-sm btn-success show-tooltip" title="Add Operator"
-                                                            href="{{ url('operator/create?country_id=' . $country->id) }}"
-                                                            data-original-title="Add Operator"><i
-                                                                class="fa fa-plus"></i></a>
-                                                    @endif
                                                     @if (get_action_icons('country/{id}/edit', 'get'))
                                                         <a class="btn btn-sm show-tooltip" title=""
                                                             href="{{ url('country/' . $country->id . '/edit') }}"
                                                             data-original-title="Edit"><i class="fa fa-edit"></i></a>
                                                     @endif
                                                     @if (get_action_icons('country/{id}/delete', 'get'))
-
                                                         <a class="btn btn-sm btn-danger show-tooltip" title=""
                                                             onclick='return ConfirmDelete()'
                                                             href="{{ url('country/' . $country->id . '/delete') }}"
                                                             data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
                                                     @endif
-
                                                 </div>
                                             </td>
                                         </tr>
@@ -89,13 +85,10 @@
     <script type="text/javascript">
         $(function() {
             $("#example").DataTable();
-
         });
-
     </script>
     <script>
         $('#country').addClass('active');
         $('#country_index').addClass('active');
-
     </script>
 @stop

@@ -9,8 +9,6 @@
     </div>
 </div>
 
-
-
 <div class="form-group"  id="cktextarea">
     <label class="col-sm-3 col-lg-2 control-label">@lang('messages.Title') <span class="text-danger">*</span></label>
     <div class="col-sm-9 col-lg-10 controls" >

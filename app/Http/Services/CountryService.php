@@ -4,6 +4,7 @@
 namespace App\Http\Services;
 
 use App\Http\Repository\CountryRepository;
+use Illuminate\Support\Arr;
 
 class CountryService
 {
@@ -26,7 +27,7 @@ class CountryService
      * handle function that make update for country
      * @param array $request
      * @return Country
-     */
+     */ 
     public function handle($request, $countryId = null)
     {
         $country = $this->countryRepository;
@@ -35,7 +36,11 @@ class CountryService
             $country = $this->countryRepository->find($countryId);
         }
 
-        $country->fill($request);
+        foreach ($request['title'] as $key => $value) {
+            $country->setTranslation('title', $key, $value);
+        }
+
+        $country->fill(Arr::except($request, ['title']));
 
         $country->save();
 

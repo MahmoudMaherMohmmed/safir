@@ -24,7 +24,8 @@ class CountryRequest extends Request
     public function rules()
     {
         return [
-            "title" => 'required|string|unique:countries,title,' . $this->id,
+            'title'     => 'required|array',
+            'title.*'   => 'required|string',
         ];
     }
 }
