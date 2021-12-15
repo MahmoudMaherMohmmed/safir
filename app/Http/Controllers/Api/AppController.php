@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Massara;
 use App\Models\Term;
 use App\Models\Center;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Mail;
@@ -76,6 +77,27 @@ class AppController extends Controller
             return response()->json(['message' => 'No Contact Mail is configured.'], 403);
         }
         
+    }
+
+    public function countries(Request $request)
+    {
+        $countries = Country::all();
+
+        return response()->json(['countries' => $this->formatCountries($countries, $request->lang)], 200);
+    }
+
+    private function formatCountries($countries, $lang)
+    {
+        $countries_array = [];
+
+        foreach($countries as $country){
+            array_push($countries_array,[
+                'id' => $country->id,
+                'title' => isset($lang) && $lang!=null ? $country->getTranslation('title', $lang) : $country->title,
+            ]);
+        }
+
+        return $countries_array;
     }
     
 }
