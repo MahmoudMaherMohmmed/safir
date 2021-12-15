@@ -17,10 +17,10 @@ class CreateSpecialTripsTable extends Migration
             $table->id();
             $table->bigInteger('client_id')->unsigned();
             $table->integer('country_id')->unsigned();
-            $table->string('start_day');
+            $table->string('start_date');
             $table->string('days_count');
             $table->string('persons_count');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('status')->default(0);
 
             $table->foreign('client_id')->references('id')->on('clients')->onUpdate('CASCADE')->onDelete('CASCADE');
