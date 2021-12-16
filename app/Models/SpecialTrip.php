@@ -11,4 +11,14 @@ class SpecialTrip extends Model
 
     protected $table = 'special_trips';
     protected $fillable = ['client_id', 'country_id', 'start_date', 'days_count', 'persons_count', 'description', 'status'];
+
+    public function client()
+    {
+      return $this->belongsTo(Client::class);
+    }
+
+    public function country()
+    {
+      return $this->belongsTo(Country::class);
+    }
 }

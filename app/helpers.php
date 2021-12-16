@@ -90,6 +90,7 @@ function get_static_routes()
         Route::post('admin/migrate_tables', 'DashboardController@migrate_tables');
 
         Route::Resource('trip', 'TripController');
+        Route::Resource('special_trip', 'SpecialTripController');
         Route::Resource('client', 'ClientController');
         Route::Resource('appointment', 'AppointmentController');
         Route::Resource('reservation', 'ReservationController');

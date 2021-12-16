@@ -352,6 +352,22 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                         </li>
                     </ul>
 
+                    <ul class="nav nav-list">
+                        <li id="country">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="glyphicon glyphicon-globe"></i>
+                                <span>@lang('messages.special_trips.special_trips')</span>
+                                <b class="arrow fa fa-angle-right"></b>
+                            </a>
+
+                            <!-- BEGIN Submenu -->
+                            <ul class="submenu">
+                                <li id="special_trip_index"><a href="{{url('special_trip')}}">@lang('messages.special_trips.special_trips')</a></li>
+                                <li id="special_trip_create"><a href="{{url('special_trip/create')}}">@lang('messages.special_trips.create_special_trip')</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
                     <!-- <ul class="nav nav-list">
                         <li id="appointment">
                             <a href="#" class="dropdown-toggle">

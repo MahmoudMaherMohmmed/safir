@@ -386,6 +386,15 @@ return [
         'persons_count' => 'عدد الافراد',
     ],
 
+    'special_trips'=>[
+        'special_trips' => 'برامج خاصة',
+        'create_special_trip' => 'اضافة برنامج خاص جديد',
+        'name' => 'اسم العميل',
+        'start_date' => 'تاريخ بداية الرحلة',
+        'days_count' => 'عدد الايام',
+        'persons_count' => 'عدد الافراد',
+    ],
+
     'centers'=>[
         'centers' => 'سافر',
         'create_center' => 'تعديل سافر',

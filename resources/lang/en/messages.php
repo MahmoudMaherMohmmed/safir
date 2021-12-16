@@ -392,6 +392,15 @@ return [
         'persons_count' => 'Persons Count',
     ],
 
+    'special_trips'=>[
+        'special_trips' => 'Special Trips',
+        'create_special_trip' => 'Add New Trip',
+        'name' => 'Client Name',
+        'start_date' => 'Start Date',
+        'days_count' => 'Days Count',
+        'persons_count' => 'Persons Count',
+    ],
+
     'centers'=>[
         'centers' => 'Safer',
         'create_center' => 'Update Safer',
