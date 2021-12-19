@@ -395,6 +395,13 @@ return [
         'persons_count' => 'عدد الافراد',
     ],
 
+    'media'=>[
+        'media' => 'الوسائط',
+        'create_media' => 'اضافة فديوا جديد',
+        'title' => 'عنوان الفديوا',
+        'video' => 'فديوا',
+    ],
+
     'centers'=>[
         'centers' => 'سافر',
         'create_center' => 'تعديل سافر',

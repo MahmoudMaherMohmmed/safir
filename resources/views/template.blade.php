@@ -368,6 +368,22 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                         </li>
                     </ul>
 
+                    <ul class="nav nav-list">
+                        <li id="country">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="glyphicon glyphicon-globe"></i>
+                                <span>@lang('messages.media.media')</span>
+                                <b class="arrow fa fa-angle-right"></b>
+                            </a>
+
+                            <!-- BEGIN Submenu -->
+                            <ul class="submenu">
+                                <li id="media_index"><a href="{{url('media')}}">@lang('messages.media.media')</a></li>
+                                <li id="media_create"><a href="{{url('media/create')}}">@lang('messages.media.create_media')</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
                     <!-- <ul class="nav nav-list">
                         <li id="appointment">
                             <a href="#" class="dropdown-toggle">

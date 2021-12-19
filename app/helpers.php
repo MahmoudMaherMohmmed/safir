@@ -91,6 +91,7 @@ function get_static_routes()
 
         Route::Resource('trip', 'TripController');
         Route::Resource('special_trip', 'SpecialTripController');
+        Route::Resource('media', 'MediaController');
         Route::Resource('client', 'ClientController');
         Route::Resource('appointment', 'AppointmentController');
         Route::Resource('reservation', 'ReservationController');

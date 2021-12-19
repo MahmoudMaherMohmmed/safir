@@ -401,6 +401,13 @@ return [
         'persons_count' => 'Persons Count',
     ],
 
+    'media'=>[
+        'media' => 'Media',
+        'create_media' => 'Add New Media',
+        'title' => 'Video Title',
+        'video' => 'Video'
+    ],
+
     'centers'=>[
         'centers' => 'Safer',
         'create_center' => 'Update Safer',
