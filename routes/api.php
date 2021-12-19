@@ -28,6 +28,7 @@ Route::get('categories', 'Api\CategoryController@index');
 Route::get('category/{category_id}/trips', 'Api\CategoryController@categoryTrips');
 Route::get('trip/{id}/show', 'Api\TripController@show');
 Route::get('countries', 'Api\AppController@countries');
+Route::get('media', 'Api\MediaController@index');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('profile', 'Api\ClientController@profile');
