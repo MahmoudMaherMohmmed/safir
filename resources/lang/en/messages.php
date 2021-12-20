@@ -390,6 +390,7 @@ return [
         'countries' => 'Countries',
         'price' => 'Price',
         'persons_count' => 'Persons Count',
+        'reserved_persons_count' => 'Reserved Persons Count',
     ],
 
     'special_trips'=>[

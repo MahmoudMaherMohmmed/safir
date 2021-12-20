@@ -14,6 +14,11 @@ class Trip extends Model
     protected $table = 'trips';
     protected $fillable = ['title', 'description', 'price', 'persons_count', 'image', 'from', 'to', 'category_id', 'country_id', 'status'];
 
+    public function category()
+    {
+      return $this->belongsTo(Category::class);
+    }
+
     public function country()
     {
       return $this->belongsTo(Country::class);

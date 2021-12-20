@@ -384,6 +384,7 @@ return [
         'countries' => 'الدول',
         'price' => 'سعر الرحلة',
         'persons_count' => 'عدد الافراد',
+        'reserved_persons_count' => 'عدد المقاعد المحجوزه'
     ],
 
     'special_trips'=>[

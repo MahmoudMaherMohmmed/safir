@@ -19,7 +19,7 @@
         </div>
     </div>
 </div>
-
+ 
 <div class="form-group">
     <label class="col-sm-3 col-lg-2 control-label">@lang('messages.trips.categories')<span class="text-danger">*</span></label>
     <div class="col-sm-9 col-lg-10 controls">

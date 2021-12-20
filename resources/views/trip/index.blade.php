@@ -36,7 +36,10 @@
                                             <th style="width:18px"><input type="checkbox" id="check_all" data-table="{{ $table_name }}"></th>
                                             <th>id</th>
                                             <th>@lang('messages.name')</th>
-                                            <th>@lang('messages.Image.Image')</th>
+                                            <th>@lang('messages.trips.categories')</th>
+                                            <th>@lang('messages.trips.countries')</th>
+                                            <th>@lang('messages.trips.persons_count')</th>
+                                            <th>@lang('messages.trips.reserved_persons_count')</th>
                                             <th>@lang('messages.action')</th>
                                         </tr>
                                     </thead>
@@ -53,15 +56,10 @@
                                                     @endforeach
                                                 </td>
 
-                                                <td>
-                                                    @if ($value->image)
-                                                        <img class=" img-circle" width="100px" height="100px"
-                                                            src="{{ url($value->image) }}" />
-                                                    @else
-                                                        <img class=" img-circle" width="100px" height="100px"
-                                                            src="https://ui-avatars.com/api/?name={{ $value->name }}" />
-                                                    @endif
-                                                </td>
+                                                <td>{{$value->category->getTranslation('title', Session::get('applocale'))}}</td>
+                                                <td>{{$value->country->getTranslation('title', Session::get('applocale'))}}</td>
+                                                <td>{{$value->persons_count}}</td>
+                                                <td>{{$value->reservations->count()}}</td>
                                                 <td class="visible-md visible-xs visible-sm visible-lg">
                                                     <div class="btn-group">
                                                         @if (get_action_icons('trip/{id}/edit', 'get'))

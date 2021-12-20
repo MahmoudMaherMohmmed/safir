@@ -99,7 +99,6 @@ class TripController extends Controller
                     $this->saveBankTransfer($request, $reservation->id);
                 }
 
-                $this->updateTripStatus($trip->id);
                 return response()->json(['message' => 'appointment reserved successfully.'], 200);
             }else{
                 return response()->json(['message' => 'an error occurred.'], 200);
@@ -126,16 +125,8 @@ class TripController extends Controller
         return true;
     }
 
-    private function updateTripStatus($trip_id){
-        $trip = Trip::where('id', $trip_id)->first();
-        $trip->status = 1;
-        $trip->save();
-
-        return true;
-    }
-
     public function countries(Request $request){
-        $countries_ids = Trip::where('status', 0)->groupBy('country_id')->pluck('country_id');
+        $countries_ids = Trip::groupBy('country_id')->pluck('country_id');
 
         return response()->json(['countries' => $this->formatCountries($countries_ids, $request->lang)], 200);
     }

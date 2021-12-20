@@ -35,4 +35,9 @@ class Category extends Model
     {
         return $this->belongsTo('App\Models\Category', 'parent_id', 'id');
     }
+
+    public function trips()
+    {
+        return $this->hasMany(Trip::class);
+    }
 }
