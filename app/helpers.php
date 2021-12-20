@@ -96,8 +96,6 @@ function get_static_routes()
         Route::Resource('appointment', 'AppointmentController');
         Route::Resource('reservation', 'ReservationController');
         Route::Resource('center', 'CenterController');
-        Route::Resource('message', 'MessageController');
-        Route::get('admin/get_client_messages/{client_id}', 'MessageController@clientMessages');
         Route::Resource('term', 'TermController');
         Route::Resource('bank', 'BankController');
     });

@@ -1,52 +1,11 @@
 <div class="form-group">
-    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.doctors.doctors') </label>
+    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.clients.clients') </label>
     <div class="col-sm-9 col-lg-10 controls">
-      <select class="form-control chosen-rtl" name="specialty_id" required disabled>
-        @foreach($doctors as $doctor)
-        <option value="{{$doctor->id}}" {{$reservation && $reservation->appointment->doctor->id==$doctor->id ? 'selected' : '' }}>{{$doctor->name}}</option>
+      <select class="form-control chosen-rtl" name="client_id" required disabled>
+        @foreach($clients as $client)
+        <option value="{{$client->id}}" {{$reservation && $reservation->client_id==$client->id ? 'selected' : '' }}>{{$client->name}}</option>
         @endforeach
       </select>
-    </div>
-</div>
-
-<div class="form-group">
-    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.appointments.date') </label>
-    <div class="col-sm-4 col-lg-5 controls">
-        <input type="text" class="form-control" name="date" value="@if ($reservation) {!! $reservation->appointment->date !!} @endif" disabled/>
-    </div>
-    <div class="col-sm-5 col-lg-5 controls">
-        <input type="text" class="form-control" name="time" value="@if ($reservation) {!! $reservation->appointment->from !!} @endif" disabled/>
-    </div>
-</div> 
-
-<div class="form-group">
-    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.reservations.patient_name') </label>
-    <div class="col-sm-9 col-lg-10 controls">
-        <input type="text" class="form-control" name="patient_name" value="@if ($reservation) {!! $reservation->patient_name !!} @endif" />
-    </div>
-</div> 
-
-<div class="form-group">
-    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.reservations.phone_number') </label>
-    <div class="col-sm-9 col-lg-10 controls">
-        <input type="text" class="form-control" name="phone_number" value="@if ($reservation) {!! $reservation->phone_number !!} @endif" />
-    </div>
-</div> 
-
-<div class="form-group">
-    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.reservations.age') </label>
-    <div class="col-sm-9 col-lg-10 controls">
-        <input type="text" class="form-control" name="age" value="@if ($reservation) {!! $reservation->age !!} @endif" />
-    </div>
-</div> 
-
-<div class="form-group">
-    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.reservations.gender') </label>
-    <div class="col-sm-9 col-lg-10 controls">
-        <select class="form-control chosen-rtl" name="gender" required>
-            <option value="0" {{$reservation && $reservation->gender==0 ? 'selected' : '' }}>Male</option>
-            <option value="1" {{$reservation && $reservation->gender==1 ? 'selected' : '' }}>Female</option>
-        </select>
     </div>
 </div>
 

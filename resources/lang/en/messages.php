@@ -391,6 +391,9 @@ return [
         'price' => 'Price',
         'persons_count' => 'Persons Count',
         'reserved_persons_count' => 'Reserved Persons Count',
+        'name' => 'Trip Title',
+        'payment_type' => 'Payment Type',
+        'status' => 'Status',
     ],
 
     'special_trips'=>[

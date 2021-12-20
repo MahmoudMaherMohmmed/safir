@@ -36,8 +36,9 @@
                                             <th style="width:18px"><input type="checkbox" id="check_all" data-table="{{ $table_name }}"></th>
                                             <th>id</th>
                                             <th>@lang('messages.name')</th>
-                                            <th>@lang('messages.appointments.date')</th>
-                                            <th>@lang('messages.appointments.time')</th>
+                                            <th>@lang('messages.trips.name')</th>
+                                            <th>@lang('messages.trips.payment_type')</th>
+                                            <th>@lang('messages.trips.status')</th>
                                             <th>@lang('messages.action')</th>
                                         </tr>
                                     </thead>
@@ -48,8 +49,9 @@
                                                 </td>
                                                 <td>{{ $value->id }}</td>
                                                 <td> {{ $value->client->name }} </td>
-                                                <td> {{ $value->appointment->date }} </td>
-                                                <td> {{ $value->appointment->from }} </td>
+                                                <td> {{ $value->trip->getTranslation('name', Session::get('applocale')) }} </td>
+                                                <td> {{ $value->payment_type==0 ? 'تحويل بنكى' : 'دفع الالكترونى' }} </td>
+                                                <td> {{ $value->status==1 ? 'قيد المراجعه' : 'تم الموافقه' }} </td>
                                                 <td class="visible-md visible-xs visible-sm visible-lg">
                                                     <div class="btn-group">
                                                         @if (get_action_icons('reservation/{id}/edit', 'get'))
@@ -58,7 +60,7 @@
                                                                 href='{{ url("reservation/$value->id/edit") }}'
                                                                 title="Edit"><i class="fa fa-edit"></i></a>
                                                         @endif
-                                                        @if (get_action_icons('reservation/{id}/delete', 'get'))
+                                                        <!-- @if (get_action_icons('reservation/{id}/delete', 'get'))
                                                             <form action="{{ route('reservation.destroy', $value->id) }}"
                                                                 method="POST" style="display: initial;">
                                                                 @method('DELETE')
@@ -67,7 +69,7 @@
                                                                     style="height: 28px;"><i
                                                                         class="fa fa-trash"></i></button>
                                                             </form>
-                                                        @endif
+                                                        @endif -->
                                                     </div>
                                                 </td>
                                             </tr>

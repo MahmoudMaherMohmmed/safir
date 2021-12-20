@@ -25,9 +25,7 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = Reservation::all();
-        $clients = Client::all();
-        $doctors = Doctor::all();
-        return view('reservation.index', compact('reservations', 'clients', 'doctors'));
+        return view('reservation.index', compact('reservations'));
     }
 
     /**
@@ -37,11 +35,10 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        $doctor = null;
-        $specialties = Specialty::all();
+        $reservation = null;
         $languages = $this->languageRepository->all();
 
-        return view('doctor.form', compact('doctor', 'specialties', 'languages'));
+        return view('reservation.form', compact('reservation', 'languages'));
     }
 
     /**
@@ -109,8 +106,8 @@ class ReservationController extends Controller
      */
     public function show($id)
     {
-        $doctor = Doctor::findOrFail($id);
-        return view('doctor.index', compact('doctor'));
+        $reservation = Reservation::findOrFail($id);
+        return view('reservation.index', compact('reservation'));
     }
 
     /**
@@ -123,8 +120,7 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::findOrFail($id);
         $clients = Client::all();
-        $doctors = Doctor::all();
-        return view('reservation.form', compact('reservation', 'clients', 'doctors'));
+        return view('reservation.form', compact('reservation', 'clients'));
     }
 
     /**

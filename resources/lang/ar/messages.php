@@ -384,7 +384,10 @@ return [
         'countries' => 'الدول',
         'price' => 'سعر الرحلة',
         'persons_count' => 'عدد الافراد',
-        'reserved_persons_count' => 'عدد المقاعد المحجوزه'
+        'reserved_persons_count' => 'عدد المقاعد المحجوزه',
+        'name' => 'عنوان الرحله',
+        'payment_type' => 'وسيلة الدفع',
+        'status' => 'الحاله',
     ],
 
     'special_trips'=>[
