@@ -63,4 +63,47 @@ class TripController extends Controller
 
         return response()->json(['message' => 'Your request registered successfully.'], 200);
     }
+
+    public function reserveAppointment(Request $request){
+        $Validated = Validator::make($request->all(), [
+            'trip_id' => 'required',
+            'payment_type' => 'required',
+            'image'      => 'max:65536'
+        ]);
+
+        if($Validated->fails())
+            return response()->json($Validated->messages(), 403);
+
+        $reservation = new Reservation();
+        $reservation->client_id = $request->user()->id;
+        $reservation->fill($request->only('trip_id', 'payment_type'));
+        if($reservation->save()){
+
+            if($reservation->payment_type == 1){
+                $this->saveBankTransfer($request, $reservation->id);
+            }
+
+            return response()->json(['message' => 'appointment reserved successfully.'], 200);
+        }else{
+            return response()->json(['message' => 'an error occurred.'], 200);
+        }  
+    }
+
+    private function saveBankTransfer($request, $reservation_id){
+        $bank = Bank::where('id', $request->bank_id)->first();
+
+        if(isset($bank) && $bank!=null){
+            $bank_transfer = New BankTransfer();
+            $bank_transfer->reservation_id = $reservation_id;
+            $bank_transfer->bank_name = $bank->name;
+            $bank_transfer->bank_account_name = $bank->account_name;
+            $bank_transfer->bank_account_number = $bank->account_number;
+            $bank_transfer->IBAN = $bank->IBAN;
+            $bank_transfer->image = $this->handleFile($request['image']);
+            $bank_transfer->save();
+        }
+
+        return true;
+    }
+
 }

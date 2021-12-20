@@ -427,4 +427,11 @@ return [
     'terms_conditions'=>[
         'terms_conditions' => 'الشروط والاحكام',
     ],
+
+    'banks'=>[
+        'banks' => 'الحسابات البنكية',
+        'create_bank' => 'اضافة حساب بنكى جديد',
+        'account_name' => 'اسم صاحب الحساب',
+        'account_number' => 'رقم الحساب',
+    ],
 ];

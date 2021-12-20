@@ -10,15 +10,15 @@ class Reservation extends Model
     use HasFactory;
 
     protected $table = 'reservations';
-    protected $fillable = ['client_id','appointment_id', 'patient_name', 'phone_number', 'age','gender', 'description', 'status'];
+    protected $fillable = ['client_id','trip_id', 'payment_method', 'status'];
 
     public function client()
     {
         return $this->belongsTo(Client::class);
     }
 
-    public function appointment()
+    public function trip()
     {
-        return $this->belongsTo(Appointment::class);
+        return $this->belongsTo(Trip::class);
     }
 }

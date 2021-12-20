@@ -227,7 +227,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     </li>
                     @endif
 
-                    @if (get_action_icons('roles', 'get'))
+                    <!-- @if (get_action_icons('roles', 'get'))
                     <li id="role">
                         <a href="#" class="dropdown-toggle">
                             <i class="glyphicon glyphicon-road"></i>
@@ -235,7 +235,6 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             <b class="arrow fa fa-angle-right"></b>
                         </a>
 
-                        <!-- BEGIN Submenu -->
                         <ul class="submenu">
                             <li id="role-create"><a href="{{url('roles/new')}}">@lang('messages.create-role')</a></li>
                             <li id="role-index"><a href="{{url('roles')}}">@lang('messages.role')</a></li>
@@ -243,7 +242,6 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             <li id="route-v2-index"><a href="{{url('routes/index_v2')}}">@lang('messages.Routes.Routes') V2</a></li>
 
                         </ul>
-                        <!-- END Submenu -->
                     </li>
                     @endif
 
@@ -255,15 +253,12 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             <b class="arrow fa fa-angle-right"></b>
                         </a>
 
-                        <!-- BEGIN Submenu -->
                         <ul class="submenu">
-                            <!--<li id="elfinder"><a href="{{url('file_manager')}}">UI File Manager</a></li>-->
                             <li id="file_elfinder"><a href="{{url('admin/elfinder')}}">@lang('messages.File Manager.uiFile Manager')</a></li>
                             <li id="uploader"><a href="{{url('upload_items')}}">@lang('messages.File Manager.file uploader')</a></li>
                         </ul>
-                        <!-- END Submenu -->
                     </li>
-                    @endif
+                    @endif -->
 
                     @if (get_action_icons('setting', 'get'))
                     <li id="images">
@@ -384,6 +379,22 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                         </li>
                     </ul>
 
+                    <ul class="nav nav-list">
+                        <li id="doctor">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="fa fa-users"></i>
+                                <span>@lang('messages.banks.banks')</span>
+                                <b class="arrow fa fa-angle-right"></b>
+                            </a>
+
+                            <!-- BEGIN Submenu -->
+                            <ul class="submenu">
+                                <li id="bank_index"><a href="{{url('bank')}}">@lang('messages.banks.banks')</a></li>
+                                <li id="bank_create"><a href="{{url('bank/create')}}">@lang('messages.banks.create_bank')</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
                     <!-- <ul class="nav nav-list">
                         <li id="appointment">
                             <a href="#" class="dropdown-toggle">
@@ -400,7 +411,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     </ul> -->
 
                     <ul class="nav nav-list">
-                        <li id="doctor">
+                        <li id="client">
                             <a href="#" class="dropdown-toggle">
                                 <i class="fa fa-users"></i>
                                 <span>@lang('messages.clients.clients')</span>
