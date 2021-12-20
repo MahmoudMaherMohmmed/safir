@@ -33,29 +33,17 @@ class CategoryController extends Controller
         return $categories_array;
     }
 
-    public function categoryTrips(Request $request, $category_id)
+    public function categoryTrips(Request $request, $category_id, $country_id)
     {
-        $countries_trips = [];
         $lang = $request->lang;
-        $countries = Trip::where('category_id', $category_id)
-                        ->groupBy('country_id')
-                        ->pluck('country_id');
+        $trips = Trip::where('category_id', $category_id)
+                        ->where('country_id', $country_id)
+                        ->get();
 
-        if(isset($countries) && count($countries)>0){
-            foreach($countries as $country_id){
-                $country = Country::where('id', $country_id)->first();
-                array_push($countries_trips,[
-                    'id' => $country->id,
-                    'name' => isset($lang) && $lang!=null ? $country->getTranslation('title', $lang) : $country->title,
-                    'trips' => $this->formatCountryTrips($country->trips, $lang)
-                ]);
-            }
-        }
-
-        return response()->json(['countries_trips' => $countries_trips], 200);
+        return response()->json(['trips' => $this->formatTrips($trips, $lang)], 200);
     }
 
-    private function formatCountryTrips($trips, $lang)
+    private function formatTrips($trips, $lang)
     {
         $trips_array = [];
 
