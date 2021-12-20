@@ -107,6 +107,29 @@ class TripController extends Controller
         return true;
     }
 
+    public function countries(Request $request){
+        $countries_ids = Trip::groupBy('country_id')->pluck('country_id');
+
+        return response()->json(['countries' => $this->formatCountries($countries_ids, $request->lang)], 200);
+    }
+
+    private function formatCountries($countries_ids, $lang)
+    {
+        $countries_array = [];
+
+        foreach($countries_ids as $id){
+            $country = Country::where('id', $id)->first();
+            if(isset($country) && $country!=null){
+                array_push($countries_array,[
+                    'id' => $country->id,
+                    'title' => isset($lang) && $lang!=null ? $country->getTranslation('title', $lang) : $country->title,
+                ]);
+            }
+        }
+
+        return $countries_array;
+    }
+
     /**
      * handle image file that return file path
      * @param File $file
