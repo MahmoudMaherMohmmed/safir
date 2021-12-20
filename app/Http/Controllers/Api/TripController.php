@@ -9,6 +9,8 @@ use App\Models\Country;
 use App\Models\specialTrip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Services\UploaderService;
+use Illuminate\Http\UploadedFile;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 
@@ -64,7 +66,7 @@ class TripController extends Controller
         return response()->json(['message' => 'Your request registered successfully.'], 200);
     }
 
-    public function reserveAppointment(Request $request){
+    public function reserveTrip(Request $request){
         $Validated = Validator::make($request->all(), [
             'trip_id' => 'required',
             'payment_type' => 'required',
@@ -78,8 +80,7 @@ class TripController extends Controller
         $reservation->client_id = $request->user()->id;
         $reservation->fill($request->only('trip_id', 'payment_type'));
         if($reservation->save()){
-
-            if($reservation->payment_type == 1){
+            if($reservation->payment_type == 0){
                 $this->saveBankTransfer($request, $reservation->id);
             }
 
@@ -104,6 +105,16 @@ class TripController extends Controller
         }
 
         return true;
+    }
+
+    /**
+     * handle image file that return file path
+     * @param File $file
+     * @return string
+     */
+    public function handleFile(UploadedFile $file)
+    {
+        return $this->uploaderService->upload($file, self::IMAGE_PATH);
     }
 
 }

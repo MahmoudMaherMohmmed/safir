@@ -37,7 +37,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('profile/update_password', 'Api\ClientController@updatePassword');
     Route::post('logout', 'Api\ClientController@logout');
     Route::post('special_trip', 'Api\TripController@specialTrip');
-    route::post('client/reservation', 'Api\AppointmentController@clientReservations');
-    Route::post('messages', 'Api\MessageController@index');
-    Route::post('message/create', 'Api\MessageController@create');
+    route::post('trip//reserve', 'Api\TripController@reserveTrip');
 });

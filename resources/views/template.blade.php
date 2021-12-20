@@ -332,9 +332,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     @endif
 
                     <ul class="nav nav-list">
-                        <li id="country">
+                        <li id="trip">
                             <a href="#" class="dropdown-toggle">
-                                <i class="glyphicon glyphicon-globe"></i>
+                                <i class="fa fa-plane"></i>
                                 <span>@lang('messages.trips.trips')</span>
                                 <b class="arrow fa fa-angle-right"></b>
                             </a>
@@ -348,9 +348,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     </ul>
 
                     <ul class="nav nav-list">
-                        <li id="country">
+                        <li id="special_trip">
                             <a href="#" class="dropdown-toggle">
-                                <i class="glyphicon glyphicon-globe"></i>
+                                <i class="fa fa-credit-card"></i>
                                 <span>@lang('messages.special_trips.special_trips')</span>
                                 <b class="arrow fa fa-angle-right"></b>
                             </a>
@@ -364,9 +364,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     </ul>
 
                     <ul class="nav nav-list">
-                        <li id="country">
+                        <li id="media">
                             <a href="#" class="dropdown-toggle">
-                                <i class="glyphicon glyphicon-globe"></i>
+                                <i class="fa fa-film"></i>
                                 <span>@lang('messages.media.media')</span>
                                 <b class="arrow fa fa-angle-right"></b>
                             </a>
@@ -380,9 +380,9 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     </ul>
 
                     <ul class="nav nav-list">
-                        <li id="doctor">
+                        <li id="bank">
                             <a href="#" class="dropdown-toggle">
-                                <i class="fa fa-users"></i>
+                                <i class="fa fa-university"></i>
                                 <span>@lang('messages.banks.banks')</span>
                                 <b class="arrow fa fa-angle-right"></b>
                             </a>
