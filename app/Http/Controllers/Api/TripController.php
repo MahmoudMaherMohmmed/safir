@@ -7,6 +7,9 @@ use App\Models\Category;
 use App\Models\Trip;
 use App\Models\Country;
 use App\Models\specialTrip;
+use App\Models\Reservation;
+use App\Models\Bank;
+use App\Models\BankTransfer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Services\UploaderService;
@@ -16,6 +19,16 @@ use Carbon\CarbonPeriod;
 
 class TripController extends Controller
 {
+    /**
+     * @var IMAGE_PATH
+     */
+    const IMAGE_PATH = 'bank_transfers';
+    
+    public function __construct(UploaderService $uploaderService)
+    {
+        $this->uploaderService = $uploaderService;
+    }
+
     public function show(Request $request, $id)
     {
         $trip = Trip::where('id', $id)->first();
@@ -76,18 +89,24 @@ class TripController extends Controller
         if($Validated->fails())
             return response()->json($Validated->messages(), 403);
 
-        $reservation = new Reservation();
-        $reservation->client_id = $request->user()->id;
-        $reservation->fill($request->only('trip_id', 'payment_type'));
-        if($reservation->save()){
-            if($reservation->payment_type == 0){
-                $this->saveBankTransfer($request, $reservation->id);
-            }
+        $trip = Trip::where('id', $request->trip_id)->first();
+        if(isset($trip) && $trip!=null){
+            $reservation = new Reservation();
+            $reservation->client_id = $request->user()->id;
+            $reservation->fill($request->only('trip_id', 'payment_type'));
+            if($reservation->save()){
+                if($reservation->payment_type == 0){
+                    $this->saveBankTransfer($request, $reservation->id);
+                }
 
-            return response()->json(['message' => 'appointment reserved successfully.'], 200);
+                $this->updateTripStatus($trip->id);
+                return response()->json(['message' => 'appointment reserved successfully.'], 200);
+            }else{
+                return response()->json(['message' => 'an error occurred.'], 200);
+            }  
         }else{
-            return response()->json(['message' => 'an error occurred.'], 200);
-        }  
+            return response()->json(['message' => 'This trip is not in out system.'], 200);
+        }
     }
 
     private function saveBankTransfer($request, $reservation_id){
@@ -107,8 +126,16 @@ class TripController extends Controller
         return true;
     }
 
+    private function updateTripStatus($trip_id){
+        $trip = Trip::where('id', $trip_id)->first();
+        $trip->status = 1;
+        $trip->save();
+
+        return true;
+    }
+
     public function countries(Request $request){
-        $countries_ids = Trip::groupBy('country_id')->pluck('country_id');
+        $countries_ids = Trip::where('status', 0)->groupBy('country_id')->pluck('country_id');
 
         return response()->json(['countries' => $this->formatCountries($countries_ids, $request->lang)], 200);
     }

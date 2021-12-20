@@ -38,6 +38,7 @@ class CategoryController extends Controller
         $lang = $request->lang;
         $trips = Trip::where('category_id', $category_id)
                         ->where('country_id', $country_id)
+                        ->where('status', 0)
                         ->get();
 
         return response()->json(['trips' => $this->formatTrips($trips, $lang)], 200);
