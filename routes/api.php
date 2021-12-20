@@ -30,6 +30,7 @@ Route::get('trip/countries', 'Api\TripController@countries');
 Route::get('trip/{id}/show', 'Api\TripController@show');
 Route::get('countries', 'Api\AppController@countries');
 Route::get('media', 'Api\MediaController@index');
+Route::get('banks', 'Api\BankController@index');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('profile', 'Api\ClientController@profile');
