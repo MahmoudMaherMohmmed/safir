@@ -388,6 +388,8 @@ return [
         'name' => 'عنوان الرحله',
         'payment_type' => 'وسيلة الدفع',
         'status' => 'الحاله',
+        'gallery' => 'معرض الصور',
+        'upload_to_gallery' => 'رفع الى معرض الصور',
     ],
 
     'special_trips'=>[

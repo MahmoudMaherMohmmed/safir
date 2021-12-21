@@ -90,6 +90,8 @@ function get_static_routes()
         Route::post('admin/migrate_tables', 'DashboardController@migrate_tables');
 
         Route::Resource('trip', 'TripController');
+        Route::get('trip/gallery/{id}', 'TripController@gallery');
+        Route::post('upload_to_gallery', 'TripGalleyController@store')->name('upload_to_gallery');
         Route::Resource('special_trip', 'SpecialTripController');
         Route::Resource('media', 'MediaController');
         Route::Resource('client', 'ClientController');

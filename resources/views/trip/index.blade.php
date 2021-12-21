@@ -63,7 +63,6 @@
                                                 <td class="visible-md visible-xs visible-sm visible-lg">
                                                     <div class="btn-group">
                                                         @if (get_action_icons('trip/{id}/edit', 'get'))
-
                                                             <a class="btn btn-sm show-tooltip"
                                                                 href='{{ url("trip/$value->id/edit") }}'
                                                                 title="Edit"><i class="fa fa-edit"></i></a>
@@ -78,6 +77,8 @@
                                                                         class="fa fa-trash"></i></button>
                                                             </form>
                                                         @endif
+                                                        <a class="btn btn-success btn-sm show-tooltip" href='{{ url("trip/gallery/$value->id") }}'
+                                                            title="Gallery"><i class="fa fa-picture-o"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

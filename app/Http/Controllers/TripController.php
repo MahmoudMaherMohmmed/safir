@@ -209,6 +209,18 @@ class TripController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function gallery($id)
+    {
+        $trip = Trip::findOrFail($id);
+        return view('trip.gallery', compact('trip'));
+    }
+
+    /**
      * handle image file that return file path
      * @param File $file
      * @return string

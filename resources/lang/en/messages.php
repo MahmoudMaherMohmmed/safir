@@ -394,6 +394,8 @@ return [
         'name' => 'Trip Title',
         'payment_type' => 'Payment Type',
         'status' => 'Status',
+        'gallery' => 'Gallery',
+        'upload_to_gallery' => 'Upload To Gallery',
     ],
 
     'special_trips'=>[
