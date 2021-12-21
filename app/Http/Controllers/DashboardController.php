@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Specialty;
-use App\Models\Doctor;
+use App\Models\Category;
+use App\Models\Country;
+use App\Models\Trip;
+use App\Models\SpecialTrip;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -34,7 +36,12 @@ class DashboardController extends Controller
     public function index()
     {
         $users = User::count();
-        return view('dashboard.index', compact('users'));
+        $categories = Category::count();
+        $countries = Country::count();
+        $trips = Trip::count();
+        $special_trips = SpecialTrip::count();
+        $clients = Client::count();
+        return view('dashboard.index', compact('users', 'categories', 'countries', 'trips', 'special_trips', 'clients'));
     }
 
     /**
