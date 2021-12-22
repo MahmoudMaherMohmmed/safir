@@ -54,7 +54,7 @@
                                                 <td>{{ $value->days_count }}</td>
                                                 <td>{{ $value->persons_count }}</td>
                                                 <td>
-                                                    @if($value->staus==0)
+                                                    @if($value->status==0)
                                                         قيد المراجعه
                                                     @elseif($value->status==1)
                                                         مقبول

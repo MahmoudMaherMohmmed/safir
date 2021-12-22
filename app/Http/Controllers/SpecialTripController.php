@@ -31,8 +31,9 @@ class SpecialTripController extends Controller
     {
         $special_trip = null;
         $countries = Country::all();
+        $clients = Client::all();
 
-        return view('special_trip.form', compact('special_trip', 'countries'));
+        return view('special_trip.form', compact('special_trip', 'countries', 'clients'));
     }
 
     /**
@@ -44,20 +45,19 @@ class SpecialTripController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'client_id'      => 'required',
-            'country_id'     => 'required',
-            'start_date'     => 'required',
-            'days_count'  => 'required',
-            'persons_count'     => 'required',
+            'client_id'  => 'required',
+            'country_id' => 'required',
+            'start_date' => 'required',
+            'days_count' => 'required',
+            'persons_count' => 'required',
             'description' => 'required',
-            'status' => 'requird'
+            'status' => 'required'
         ]);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
 
-        dd( $request->all() );
         SpecialTrip::create( $request->all() );
 
         \Session::flash('success', trans('messages.Added Successfully'));
@@ -101,18 +101,24 @@ class SpecialTripController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'client_id'      => 'required',
-            'country_id'     => 'required',
             'start_date'     => 'required',
             'days_count'  => 'required',
             'persons_count'     => 'required',
             'description' => 'required',
-            'status' => 'requird'
+            'status' => 'required'
         ]);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
+
+        $special_trip = SpecialTrip::find($id);
+        $special_trip->start_date = $request->start_date;
+        $special_trip->days_count = $request->days_count;
+        $special_trip->persons_count = $request->persons_count;
+        $special_trip->description = $request->description;
+        $special_trip->status = $request->status;
+        $special_trip->save();
         
         \Session::flash('success', trans('messages.updated successfully'));
         return redirect('/special_trip');

@@ -1,7 +1,7 @@
 <div class="form-group">
     <label class="col-sm-3 col-lg-2 control-label">@lang('messages.special_trips.name')<span class="text-danger">*</span></label>
     <div class="col-sm-9 col-lg-10 controls">
-      <select class="form-control chosen-rtl" name="client_id" required disabled>
+      <select class="form-control chosen-rtl" name="client_id" required {{$special_trip!=null ? 'disabled' : ''}}>
         @foreach($clients as $client)
         <option value="{{$client->id}}" {{$special_trip && $special_trip->client_id==$client->id ? 'selected' : '' }}>{{$client->name}}</option>
         @endforeach
@@ -12,7 +12,7 @@
 <div class="form-group">
     <label class="col-sm-3 col-lg-2 control-label">@lang('messages.trips.countries')<span class="text-danger">*</span></label>
     <div class="col-sm-9 col-lg-10 controls">
-      <select class="form-control chosen-rtl" name="country_id" required disabled>
+      <select class="form-control chosen-rtl" name="country_id" required {{$special_trip!=null ? 'disabled' : ''}}>
         @foreach($countries as $country)
         <option value="{{$country->id}}" {{$special_trip && $special_trip->country_id==$country->id ? 'selected' : '' }}>{{$country->title}}</option>
         @endforeach
