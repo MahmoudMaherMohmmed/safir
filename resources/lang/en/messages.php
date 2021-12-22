@@ -372,10 +372,8 @@ return [
     'reservations'=>[
         'reservations' => 'Reservations',
         'create_reservation' => 'Add New Reservation',
-        'patient_name' => 'Patient Name',
-        'age' => 'Age',
-        'phone_number' => 'Phone Number',
-        'gender' => 'Gender',
+        'client_name' => 'Client Name',
+        'trip_name' => 'Trip Name',
     ],
 
     'clients'=>[

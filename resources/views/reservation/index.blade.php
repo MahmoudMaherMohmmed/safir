@@ -15,11 +15,11 @@
                         <div class="box-content">
                             <div class="btn-toolbar pull-right">
                                 <div class="btn-group">
-                                    <!-- @if (get_action_icons('reservation/create', 'get'))
+                                    @if (get_action_icons('reservation/create', 'get'))
                                         <a class="btn btn-circle show-tooltip" title=""
                                             href="{{ url('reservation/create') }}" data-original-title="Add new record"><i
                                                 class="fa fa-plus"></i></a>
-                                    @endif -->
+                                    @endif
                                     <?php $table_name = 'reservations';
                                     // pass table name to delete all function
                                     // if the current route exists in delete all table flags it will appear in view
@@ -50,7 +50,7 @@
                                                 <td>{{ $value->id }}</td>
                                                 <td> {{ $value->client->name }} </td>
                                                 <td> {{ $value->trip->getTranslation('name', Session::get('applocale')) }} </td>
-                                                <td> {{ $value->payment_type==0 ? 'تحويل بنكى' : 'دفع الالكترونى' }} </td>
+                                                <td> {{ $value->bankTransfer!=null ? ($value->payment_type==0 ? 'تحويل بنكى' : 'دفع الالكترونى') : '---'}} </td>
                                                 <td> {{ $value->status==1 ? 'قيد المراجعه' : 'تم الموافقه' }} </td>
                                                 <td class="visible-md visible-xs visible-sm visible-lg">
                                                     <div class="btn-group">
@@ -59,7 +59,7 @@
                                                                 href='{{ url("reservation/$value->id/edit") }}'
                                                                 title="Edit"><i class="fa fa-edit"></i></a>
                                                         @endif
-                                                        @if($value->payment_type==0)
+                                                        @if($value->payment_type==0 && $value->bankTransfer!=null)
                                                             @php $bank_transfer = $value->bankTransfer @endphp
                                                             <a class="btn btn-sm btn-success show-tooltip"
                                                                 href='{{ url("bank_transfer/$bank_transfer->id") }}'

@@ -365,11 +365,9 @@ return [
 
     'reservations'=>[
         'reservations' => 'الحجوزات',
-        'create_reservation' => 'حجز موعد',
-        'patient_name' => 'أسم المريض',
-        'age' => 'السن',
-        'phone_number' => 'رقم الهاتف',
-        'gender' => 'الجنس',
+        'create_reservation' => 'حجز رحلة',
+        'client_name' => 'أسم المريض',
+        'trip_name' => 'عنوان الرحله',
     ],
 
     'clients'=>[

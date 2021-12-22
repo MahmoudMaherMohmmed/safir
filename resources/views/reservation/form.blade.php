@@ -29,7 +29,7 @@
 @stop
 @section('script')
     <script>
-        $('#reservations').addClass('active');
-        $('#reservations_create').addClass('active');
+        $('#reservation').addClass('active');
+        $('#reservation_create').addClass('active');
     </script>
 @stop
