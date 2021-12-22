@@ -1,31 +1,9 @@
 <div class="form-group">
-    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.name') <span class="text-danger">*</span></label>
+    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.special_trips.name')<span class="text-danger">*</span></label>
     <div class="col-sm-9 col-lg-10 controls">
-        <ul id="myTab1" class="nav nav-tabs">
-            <?php $i = 0; ?>
-            @foreach ($languages as $language)
-                <li class="{{ $i++ ? '' : 'active' }}"><a href="#name{{ $language->short_code }}"
-                        data-toggle="tab">
-                        {{ $language->title }}</a></li>
-            @endforeach
-        </ul>
-        <div class="tab-content">
-            <?php $i = 0; ?>
-            @foreach ($languages as $language)
-                <div class="tab-pane fade in {{ $i++ ? '' : 'active' }}" id="name{{ $language->short_code }}">
-                    <input class="form-control" name="name[{{ $language->short_code }}]" value="@if ($trip) {!! $trip->getTranslation('name', $language->short_code) !!} @endif" />
-                </div>
-            @endforeach
-        </div>
-    </div>
-</div>
-
-<div class="form-group">
-    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.trips.categories')<span class="text-danger">*</span></label>
-    <div class="col-sm-9 col-lg-10 controls">
-      <select class="form-control chosen-rtl" name="category_id" required>
-        @foreach($categories as $category)
-        <option value="{{$category->id}}" {{$trip && $trip->category_id==$category->id ? 'selected' : '' }}>{{$category->title}}</option>
+      <select class="form-control chosen-rtl" name="client_id" required disabled>
+        @foreach($clients as $client)
+        <option value="{{$client->id}}" {{$special_trip && $special_trip->client_id==$client->id ? 'selected' : '' }}>{{$client->name}}</option>
         @endforeach
       </select>
     </div>
@@ -34,90 +12,50 @@
 <div class="form-group">
     <label class="col-sm-3 col-lg-2 control-label">@lang('messages.trips.countries')<span class="text-danger">*</span></label>
     <div class="col-sm-9 col-lg-10 controls">
-      <select class="form-control chosen-rtl" name="country_id" required>
+      <select class="form-control chosen-rtl" name="country_id" required disabled>
         @foreach($countries as $country)
-        <option value="{{$country->id}}" {{$trip && $trip->country_id==$country->id ? 'selected' : '' }}>{{$country->title}}</option>
+        <option value="{{$country->id}}" {{$special_trip && $special_trip->country_id==$country->id ? 'selected' : '' }}>{{$country->title}}</option>
         @endforeach
       </select>
     </div>
 </div>
 
 <div class="form-group">
-    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.trips.price') <span class="text-danger">*</span></label>
-    <div class="col-sm-9 col-lg-10 controls">
-        <input type="text" class="form-control" name="price" value="@if ($trip) {{ $trip->price }} @endif" />
-    </div>
-</div>
-
-<div class="form-group">
     <label class="col-sm-3 col-lg-2 control-label">@lang('messages.appointments.date') <span class="text-danger">*</span></label>
-    <div class="col-sm-4 col-lg-5 controls">
-        {!! Form::text('from',null,['placeholder'=>'From','class'=>'form-control js-datepicker' ,'value' => 'date("Y-m-d")' , 'autocomplete' => 'off' ]) !!}
-    </div>
-    <div class="col-sm-4 col-lg-5 controls">
-        {!! Form::text('to',null,['placeholder'=>'To','class'=>'form-control js-datepicker' ,'value' => 'date("Y-m-d")' , 'autocomplete' => 'off' ]) !!}
+    <div class="col-sm-9 col-lg-10 controls">
+        {!! Form::text('start_date', null, ['placeholder'=>'To', 'class'=>'form-control js-datepicker', 'value' => '$special_trip->start_date', 'autocomplete' => 'off' ]) !!}
     </div>
 </div> 
 
 <div class="form-group">
+    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.special_trips.days_count') <span class="text-danger">*</span></label>
+    <div class="col-sm-9 col-lg-10 controls">
+        <input type="text" class="form-control" name="days_count" value="@if ($special_trip) {{ $special_trip->days_count }} @endif" />
+    </div>
+</div>
+
+<div class="form-group">
     <label class="col-sm-3 col-lg-2 control-label">@lang('messages.trips.persons_count') <span class="text-danger">*</span></label>
     <div class="col-sm-9 col-lg-10 controls">
-        <input type="text" class="form-control" name="persons_count" value="@if ($trip) {{ $trip->persons_count }} @endif" />
+        <input type="text" class="form-control" name="persons_count" value="@if ($special_trip) {{ $special_trip->persons_count }} @endif" />
     </div>
 </div>
 
 <div class="form-group">
-    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.description') <span
-            class="text-danger">*</span></label>
+    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.description') <span class="text-danger">*</span></label>
     <div class="col-sm-9 col-lg-10 controls">
-        <ul id="myTab1" class="nav nav-tabs">
-            <?php $i = 0; ?>
-            @foreach ($languages as $language)
-                <li class="{{ $i++ ? '' : 'active' }}"><a href="#description{{ $language->short_code }}"
-                        data-toggle="tab"> {{ $language->title }}</a></li>
-            @endforeach
-        </ul>
-        <div class="tab-content">
-            <?php $i = 0; ?>
-            @foreach ($languages as $language)
-                <div class="tab-pane fade in {{ $i++ ? '' : 'active' }}"
-                    id="description{{ $language->short_code }}">
-                    <textarea class="form-control col-md-12"
-                        name="description[{{ $language->short_code }}]" rows="6">
-                        @if ($trip) 
-                            {{ $trip->getTranslation('description', $language->short_code) }}
-                        @else
-                            {{ old('description.' . $language->short_code) }}
-                        @endif
-                    </textarea>
-                </div>
-            @endforeach
-        </div>
+        <textarea class="form-control" name="description" rows=6>{{$special_trip ? $special_trip->description : ''}}</textarea>
     </div>
 </div>
 
 <div class="form-group">
-    <label class="col-sm-3 col-md-2 control-label">@lang('messages.Image.Image')</label>
-    <div class="col-sm-9 col-md-8 controls">
-        <div class="fileupload fileupload-new" data-provides="fileupload">
-            <div class="fileupload-new img-thumbnail" style="width: 200px; height: 150px;">
-                @if($trip)
-                    <img src="{{url($trip->image)}}" alt="" />
-                @else
-                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
-                @endif
-            </div>
-            <div class="fileupload-preview fileupload-exists img-thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-            <div>
-                <span class="btn btn-file"><span class="fileupload-new">@lang('messages.select_image')</span>
-                    <span class="fileupload-exists">Change</span>
-                    {!! Form::file('image',["accept"=>"image/*" ,"class"=>"default"]) !!}
-                </span>
-                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-            </div>
-        </div>
-        <span class="label label-important">NOTE!</span>
-        <span>Only extensions supported png, jpg, and jpeg</span>
+    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.status.status')<span class="text-danger">*</span></label>
+    <div class="col-sm-9 col-lg-10 controls">
+      <select class="form-control chosen-rtl" name="status" required>
+        <option value="0" {{$special_trip && $special_trip->status==0 ? 'selected' : '' }}>قيد المراجعه</option>
+        <option value="1" {{$special_trip && $special_trip->status==1 ? 'selected' : '' }}>مقبول</option>
+        <option value="2" {{$special_trip && $special_trip->status==2 ? 'selected' : '' }}>مرفوض</option>
+      </select>
     </div>
 </div>
 

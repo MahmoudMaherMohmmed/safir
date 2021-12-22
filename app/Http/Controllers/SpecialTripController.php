@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SpecialTrip;
 use App\Models\Country;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -87,7 +88,7 @@ class SpecialTripController extends Controller
         $special_trip = SpecialTrip::findOrFail($id);
         $countries = Country::all();
         $clients = Client::all();
-        return view('special_trip.form', compact('special_trip', 'countries'));
+        return view('special_trip.form', compact('special_trip', 'countries', 'clients'));
     }
 
     /**

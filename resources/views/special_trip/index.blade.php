@@ -39,6 +39,7 @@
                                             <th>@lang('messages.special_trips.start_date')</th>
                                             <th>@lang('messages.special_trips.days_count')</th>
                                             <th>@lang('messages.special_trips.persons_count')</th>
+                                            <th>@lang('messages.status.status')</th>
                                             <th>@lang('messages.action')</th>
                                         </tr>
                                     </thead>
@@ -52,6 +53,15 @@
                                                 <td>{{ $value->start_date }}</td>
                                                 <td>{{ $value->days_count }}</td>
                                                 <td>{{ $value->persons_count }}</td>
+                                                <td>
+                                                    @if($value->staus==0)
+                                                        قيد المراجعه
+                                                    @elseif($value->status==1)
+                                                        مقبول
+                                                    @else
+                                                        مرفوض      
+                                                    @endif
+                                                </td>
 
                                                 <td class="visible-md visible-xs visible-sm visible-lg">
                                                     <div class="btn-group">
