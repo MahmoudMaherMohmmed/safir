@@ -55,10 +55,15 @@
                                                 <td class="visible-md visible-xs visible-sm visible-lg">
                                                     <div class="btn-group">
                                                         @if (get_action_icons('reservation/{id}/edit', 'get'))
-
                                                             <a class="btn btn-sm show-tooltip"
                                                                 href='{{ url("reservation/$value->id/edit") }}'
                                                                 title="Edit"><i class="fa fa-edit"></i></a>
+                                                        @endif
+                                                        @if($value->payment_type==0)
+                                                            @php $bank_transfer = $value->bankTransfer @endphp
+                                                            <a class="btn btn-sm btn-success show-tooltip"
+                                                                href='{{ url("bank_transfer/$bank_transfer->id") }}'
+                                                                title="Edit"><i class="fa fa-eye"></i></a>
                                                         @endif
                                                         <!-- @if (get_action_icons('reservation/{id}/delete', 'get'))
                                                             <form action="{{ route('reservation.destroy', $value->id) }}"

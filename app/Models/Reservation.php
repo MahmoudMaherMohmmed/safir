@@ -21,4 +21,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(Trip::class);
     }
+
+    public function bankTransfer()
+    {
+        return $this->hasOne(BankTransfer::class);
+    }
 }

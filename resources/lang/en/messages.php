@@ -447,5 +447,15 @@ return [
         'account_name' => 'Account Name',
         'account_number' => 'Account Number',
     ],
+
+    'bank_transfers'=>[
+        'bank_transfers' => 'Bank Transfers',
+        'bank_transfer_details' => 'Bank Transfer Details',
+        'bank_name' => 'Bank Name',
+        'bank_account_name' => 'Account Name',
+        'bank_account_number' => 'Account Number',
+        'IBAN' => 'IBAN',
+        'image' => 'Image',
+    ],
     
 ];

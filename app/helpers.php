@@ -100,6 +100,7 @@ function get_static_routes()
         Route::Resource('center', 'CenterController');
         Route::Resource('term', 'TermController');
         Route::Resource('bank', 'BankController');
+        Route::Resource('bank_transfer', 'BankTransferController');
     });
 
 

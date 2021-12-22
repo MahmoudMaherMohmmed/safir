@@ -379,6 +379,20 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     </ul>
 
                     <ul class="nav nav-list">
+                        <li id="bank_transfer">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="fa fa-bookmark"></i>
+                                <span>@lang('messages.bank_transfers.bank_transfers')</span>
+                                <b class="arrow fa fa-angle-right"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li id="bank_transfer_index"><a href="{{url('bank_transfer')}}">@lang('messages.bank_transfers.bank_transfers')</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav nav-list">
                         <li id="media">
                             <a href="#" class="dropdown-toggle">
                                 <i class="fa fa-film"></i>

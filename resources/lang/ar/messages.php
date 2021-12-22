@@ -440,4 +440,14 @@ return [
         'account_name' => 'اسم صاحب الحساب',
         'account_number' => 'رقم الحساب',
     ],
+
+    'bank_transfers'=>[
+        'bank_transfers' => 'التحويلات البنكية',
+        'bank_transfer_details' => 'تفاصيل التحويل البنكى',
+        'bank_name' => 'اسم البنك',
+        'bank_account_name' => 'اسم صاحب الحساب',
+        'bank_account_number' => 'رقم الحساب',
+        'IBAN' => 'IBAN',
+        'image' => 'صورة التحويل',
+    ],
 ];
