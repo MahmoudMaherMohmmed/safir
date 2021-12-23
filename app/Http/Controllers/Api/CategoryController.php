@@ -58,6 +58,7 @@ class CategoryController extends Controller
                 'trip_duration' => $this->getTripDuration($trip->from, $trip->to),
                 'trip_persons_count' => $trip->persons_count,
                 'trip_image' => url($trip->image),
+                'trip_images' => $this->tripImages($trip),
             ]);
         }
 
@@ -67,5 +68,18 @@ class CategoryController extends Controller
     private function getTripDuration($start_date, $end_date)
     {
         return CarbonPeriod::create($start_date, $end_date)->count();
+    }
+
+    private function tripImages($trip){
+        $trip_images_array = [];
+        $trip_images = $trip->images;
+
+        if(isset($trip_images) && count($trip_images)>0){
+            foreach($trip_images as $image){
+                array_push($trip_images_array, url($image->image));
+            }
+        }
+
+        return $trip_images_array;
     }
 }

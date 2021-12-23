@@ -39,18 +39,19 @@ class TripController extends Controller
     private function formatTrip($trip, $lang)
     {
         $trip_array = [];
-
+ 
         if(isset($trip) && $trip!=null){
             $trip_array = [
-                'id' => $trip->id,
-                'title' => isset($lang) && $lang!=null ? $trip->getTranslation('name', $lang) : $trip->name,
-                'description' => isset($lang) && $lang!=null ? $trip->getTranslation('description', $lang) : $trip->description,
-                'price' => $trip->price,
-                'start_date' => $trip->from,
-                'end_date' => $trip->to,
-                'duration' => $this->getTripDuration($trip->from, $trip->to),
-                'persons_count' => $trip->persons_count,
-                'image' => url($trip->image),
+                'trip_id' => $trip->id,
+                'trip_title' => isset($lang) && $lang!=null ? $trip->getTranslation('name', $lang) : $trip->name,
+                'trip_description' => isset($lang) && $lang!=null ? $trip->getTranslation('description', $lang) : $trip->description,
+                'trip_price' => $trip->price,
+                'trip_start_date' => $trip->from,
+                'trip_end_date' => $trip->to,
+                'trip_duration' => $this->getTripDuration($trip->from, $trip->to),
+                'trip_persons_count' => $trip->persons_count,
+                'trip_image' => url($trip->image),
+                'trip_images' => $this->tripImages($trip),
             ];
         }
 
@@ -60,6 +61,19 @@ class TripController extends Controller
     private function getTripDuration($start_date, $end_date)
     {
         return CarbonPeriod::create($start_date, $end_date)->count();
+    }
+
+    private function tripImages($trip){
+        $trip_images_array = [];
+        $trip_images = $trip->images;
+
+        if(isset($trip_images) && count($trip_images)>0){
+            foreach($trip_images as $image){
+                array_push($trip_images_array, url($image->image));
+            }
+        }
+
+        return $trip_images_array;
     }
 
     public function specialTrip(Request $request)
