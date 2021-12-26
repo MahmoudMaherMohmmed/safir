@@ -4,7 +4,6 @@
     <div class="col-sm-9 col-lg-10 controls">
         <input type="text" name="name" placeholder="@lang('messages.users.user_name')" class="form-control input-lg"
             required value="{{ $user->name ?? old('name') }}">
-        <span class="help-inline">@lang('messages.users.add_user')</span>
     </div>
 </div>
 
