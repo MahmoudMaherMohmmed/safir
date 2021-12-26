@@ -21,14 +21,14 @@ class MediaController extends Controller
 
         if(isset($media) && $media!=null){
             foreach($media as $video){
-                $media_array = [
+                array_push($media_array, [
                     'id' => $video->id,
                     'title' => isset($lang) && $lang!=null ? $video->getTranslation('title', $lang) : $video->title,
                     'views' => $video->views,
                     'video' => url($video->video),
                     'image' => url($video->image),
                     'created_at' => $video->created_at->diffForHumans(),
-                ];
+                ]);
             }
         }
 
