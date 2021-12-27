@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Trip;
 use App\Models\Country;
-use App\Models\specialTrip;
+use App\Models\SpecialTrip;
 use App\Models\Reservation;
 use App\Models\Bank;
 use App\Models\BankTransfer;
@@ -88,7 +88,7 @@ class TripController extends Controller
         if($Validated->fails())
             return response()->json($Validated->messages(), 403); 
 
-        specialTrip::create( array_merge($request->all(), ['client_id' => $request->user()->id]) );
+        SpecialTrip::create( array_merge($request->all(), ['client_id' => $request->user()->id]) );
 
         return response()->json(['message' => 'Your request registered successfully.'], 200);
     }

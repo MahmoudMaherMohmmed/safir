@@ -7,14 +7,15 @@ use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->get_privilege();
+    }
+
     public function index()
     {
-        //
+        $notifications = Notification::all();
+        return view('notification.index', compact('notifications'));
     }
 
     /**
@@ -24,7 +25,9 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        //
+        $notification = null;
+
+        return view('notification.form', compact('notification'));
     }
 
     /**
@@ -35,51 +38,69 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'client_id'  => 'required',
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        Notification::create( $request->all() );
+
+        \Session::flash('success', trans('messages.Added Successfully'));
+
+        return redirect('/notification');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Notification  $notification
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Notification $notification)
+    public function show($id)
     {
-        //
+        $notification = Notification::findOrFail($id);
+        return view('notification.index', compact('notification'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Notification  $notification
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Notification $notification)
+    public function edit($id)
     {
-        //
+        return back();
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Notification  $notification
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Notification $notification)
+    public function update(Request $request, $id)
     {
-        //
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Notification  $notification
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Notification $notification)
+    public function destroy($id)
     {
-        //
+        $notification = Notification::find($id);
+        $notification->delete();
+
+        return redirect()->back();
     }
 }
