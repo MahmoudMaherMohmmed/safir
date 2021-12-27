@@ -41,6 +41,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('special_trip', 'Api\TripController@specialTrip');
     route::post('trip/reserve', 'Api\TripController@reserveTrip');
     route::get('client/trip/reservation/current', 'Api\TripController@clientCurrentReservations');
+    route::get('client/trip/reservation/finished', 'Api\TripController@clientFinishedReservations');
     Route::get('notifications', 'Api\NotificationController@index');
     Route::post('notification/delete', 'Api\NotificationController@delete');
 });
