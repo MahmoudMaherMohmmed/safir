@@ -8,6 +8,8 @@ use App\Models\Term;
 use App\Models\Center;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Validator;
 use Mail;
 
@@ -98,6 +100,71 @@ class AppController extends Controller
         }
 
         return $countries_array;
+    }
+
+    public function search($key, Request $request){
+        $trips = [];
+
+        $countries = Country::join('translatables', 'translatables.record_id','=', 'countries.id')
+                        ->join('tans_bodies', 'tans_bodies.translatable_id', '=', 'translatables.id')
+                        ->where('translatables.table_name', 'countries')
+                        ->where('tans_bodies.body', 'Like', '%'.$key.'%')
+                        ->orWhere('countries.title', 'Like', '%'.$key.'%')
+                        ->groupBy(['countries.id'])
+                        ->get(['countries.id']);
+
+        if(isset($countries) && $countries!=null && count($countries)>0){
+            foreach($countries as $country){
+                $trips = $this->formatTrips($country->trips, $request->lang);
+            }
+        }else{
+            $trips = Trip::join('translatables', 'translatables.record_id','=', 'trips.id')
+                        ->join('tans_bodies', 'tans_bodies.translatable_id', '=', 'translatables.id')
+                        ->where('translatables.table_name', 'trips')
+                        ->where('tans_bodies.body', 'Like', '%'.$key.'%')
+                        ->orWhere('trips.name', 'Like', '%'.$key.'%')
+                        ->groupBy(['trips.id'])
+                        ->get(['trips.id']);
+
+            if(isset($trips) && $trips!=null && count($trips)>0){
+                foreach($trips as $trip_id){
+                    $trips = $this->formatTrips(Trip::find($trip_id), $request->lang);
+                }
+            }
+        }
+
+        
+        return response()->json(['trips' => $trips]);
+    }
+
+    private function formatTrips($trips, $lang)
+    {
+        $trips_array = [];
+ 
+        foreach($trips as $trip){
+            array_push($trips_array, [
+                'trip_id' => $trip->id,
+                'trip_title' => isset($lang) && $lang!=null ? $trip->getTranslation('name', $lang) : $trip->name,
+                'trip_description' => isset($lang) && $lang!=null ? $trip->getTranslation('description', $lang) : $trip->description,
+                'trip_price' => $trip->price,
+                'trip_start_date' => $trip->from,
+                'trip_end_date' => $trip->to,
+                'trip_duration' => $this->getTripDuration($trip->from, $trip->to),
+                'trip_persons_count' => $trip->persons_count,
+                'trip_image' => url($trip->image),
+                'status' => isset($trip->reservations)&&$trip->reservations!=null ? $trip->reservations->first()->status : null,
+                'payment_type' => isset($trip->reservations)&&$trip->reservations!=null ? $trip->reservations->first()->payment_type : null,
+                'country' => isset($lang) && $lang!=null ? $trip->country->getTranslation('title', $lang) : $trip->country->title,
+                'category' => isset($lang) && $lang!=null ? $trip->category->getTranslation('title', $lang) : $trip->category->title,
+            ]);
+        }
+
+        return $trips_array;
+    }
+
+    private function getTripDuration($start_date, $end_date)
+    {
+        return CarbonPeriod::create($start_date, $end_date)->count();
     }
     
 }
