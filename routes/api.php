@@ -39,6 +39,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('profile/update_password', 'Api\ClientController@updatePassword');
     Route::post('logout', 'Api\ClientController@logout');
     Route::post('special_trip', 'Api\TripController@specialTrip');
+    route::get('client/special_trip/reservation/current', 'Api\TripController@specialTripClientCurrentReservations');
+    route::get('client/special_trip/reservation/finished', 'Api\TripController@specialTripClientFinishedReservations');
     route::post('trip/reserve', 'Api\TripController@reserveTrip');
     route::get('client/trip/reservation/current', 'Api\TripController@clientCurrentReservations');
     route::get('client/trip/reservation/finished', 'Api\TripController@clientFinishedReservations');

@@ -160,6 +160,28 @@ class TripController extends Controller
         }
     }
 
+    public function specialTripClientCurrentReservations(Request $request){
+        $client_id = $request->user()->id;
+        $special_trips_array = [];
+
+        $special_trips = specialTrip::where('client_id', $client_id)->get();
+        if(isset($special_trips) && $special_trips!=null){
+            foreach($special_trips as $trip){
+                array_push($special_trips_array, [
+                    'id' => $trip->id,
+                    'start_date' => $trip->start_date,
+                    'duration' => $trip->days_count,
+                    'persons_count' => $trip->persons_count,
+                    'status' => $trip->status,
+                    'country' => isset($lang) && $lang!=null ? $trip->country->getTranslation('title', $lang) : $trip->country->title,
+                    'category' => isset($lang) && $lang!=null && $lang=='ar' ? 'رحلات خاصة' : 'Special Trip',
+                ]);
+            }
+        }
+
+        return response()->json(['special_trips' => $special_trips_array], 200);
+    }
+
     private function saveBankTransfer($request, $reservation_id){
         $bank = Bank::where('id', $request->bank_id)->first();
 
