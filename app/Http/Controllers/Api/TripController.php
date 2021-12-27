@@ -36,6 +36,23 @@ class TripController extends Controller
         return response()->json(['trip' => $this->formatTrip($trip, $request->lang)], 200);
     }
 
+    public function clientCurrentReservations(Request $request){
+        $client_id = $request->user()->id;
+        $reservations_array = [];
+
+        $reservations = Reservation::where('client_id', $client_id)->get();
+        if(isset($reservations) && $reservations!=null){
+            foreach($reservations as $reservation){
+                if(isset($reservation->trip) && $reservation->trip!=null)
+                {
+                    array_push($reservations_array, $this->formatTrip($reservation->trip, $request->lang));
+                }
+            }
+        }
+
+        return response()->json(['reservations' => $reservations_array], 200);
+    }
+
     private function formatTrip($trip, $lang)
     {
         $trip_array = [];
@@ -52,6 +69,9 @@ class TripController extends Controller
                 'trip_persons_count' => $trip->persons_count,
                 'trip_image' => url($trip->image),
                 'trip_images' => $this->tripImages($trip),
+                'status' => $trip->reservations->first()->status,
+                'country' => isset($lang) && $lang!=null ? $trip->country->getTranslation('title', $lang) : $trip->country->title,
+                'category' => isset($lang) && $lang!=null ? $trip->category->getTranslation('title', $lang) : $trip->category->title,
             ];
         }
 
