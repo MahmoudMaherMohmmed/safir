@@ -7,6 +7,7 @@ use App\Models\Massara;
 use App\Models\Term;
 use App\Models\Center;
 use App\Models\Country;
+use App\Models\Trip;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -152,10 +153,7 @@ class AppController extends Controller
                 'trip_duration' => $this->getTripDuration($trip->from, $trip->to),
                 'trip_persons_count' => $trip->persons_count,
                 'trip_image' => url($trip->image),
-                'status' => isset($trip->reservations)&&$trip->reservations!=null ? $trip->reservations->first()->status : null,
-                'payment_type' => isset($trip->reservations)&&$trip->reservations!=null ? $trip->reservations->first()->payment_type : null,
-                'country' => isset($lang) && $lang!=null ? $trip->country->getTranslation('title', $lang) : $trip->country->title,
-                'category' => isset($lang) && $lang!=null ? $trip->category->getTranslation('title', $lang) : $trip->category->title,
+                'trip_images' => $this->tripImages($trip),
             ]);
         }
 
@@ -165,6 +163,19 @@ class AppController extends Controller
     private function getTripDuration($start_date, $end_date)
     {
         return CarbonPeriod::create($start_date, $end_date)->count();
+    }
+
+    private function tripImages($trip){
+        $trip_images_array = [];
+        $trip_images = $trip->images;
+
+        if(isset($trip_images) && count($trip_images)>0){
+            foreach($trip_images as $image){
+                array_push($trip_images_array, url($image->image));
+            }
+        }
+
+        return $trip_images_array;
     }
     
 }
