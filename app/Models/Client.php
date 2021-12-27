@@ -56,8 +56,8 @@ class Client extends Authenticatable
         return $this->hasMany(Reservation::class);
     }
 
-    public function messages()
+    public function notifications()
     {
-        return $this->hasMany(Message::class);
+        return $this->hasMany(Notification::class);
     }
 }

@@ -40,4 +40,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', 'Api\ClientController@logout');
     Route::post('special_trip', 'Api\TripController@specialTrip');
     route::post('trip/reserve', 'Api\TripController@reserveTrip');
+    Route::get('notifications', 'Api\NotificationController@index');
+    Route::post('notification/delete', 'Api\NotificationController@delete');
 });
