@@ -393,22 +393,6 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     </ul>
 
                     <ul class="nav nav-list">
-                        <li id="media">
-                            <a href="#" class="dropdown-toggle">
-                                <i class="fa fa-film"></i>
-                                <span>@lang('messages.media.media')</span>
-                                <b class="arrow fa fa-angle-right"></b>
-                            </a>
-
-                            <!-- BEGIN Submenu -->
-                            <ul class="submenu">
-                                <li id="media_index"><a href="{{url('media')}}">@lang('messages.media.media')</a></li>
-                                <li id="media_create"><a href="{{url('media/create')}}">@lang('messages.media.create_media')</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <ul class="nav nav-list">
                         <li id="bank">
                             <a href="#" class="dropdown-toggle">
                                 <i class="fa fa-university"></i>
@@ -425,6 +409,22 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     </ul>
 
                     <ul class="nav nav-list">
+                        <li id="media">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="fa fa-film"></i>
+                                <span>@lang('messages.media.media')</span>
+                                <b class="arrow fa fa-angle-right"></b>
+                            </a>
+
+                            <!-- BEGIN Submenu -->
+                            <ul class="submenu">
+                                <li id="media_index"><a href="{{url('media')}}">@lang('messages.media.media')</a></li>
+                                <li id="media_create"><a href="{{url('media/create')}}">@lang('messages.media.create_media')</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav nav-list">
                         <li id="client">
                             <a href="#" class="dropdown-toggle">
                                 <i class="fa fa-users"></i>
@@ -436,6 +436,22 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             <ul class="submenu">
                                 <li id="client_index"><a href="{{url('client')}}">@lang('messages.clients.clients')</a></li>
                                 <li id="client_create"><a href="{{url('client/create')}}">@lang('messages.clients.create_client')</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav nav-list">
+                        <li id="notification">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="fa fa-bell"></i>
+                                <span>@lang('messages.notifications.notifications')</span>
+                                <b class="arrow fa fa-angle-right"></b>
+                            </a>
+
+                            <!-- BEGIN Submenu -->
+                            <ul class="submenu">
+                                <li id="notification_index"><a href="{{url('notification')}}">@lang('messages.notifications.notifications')</a></li>
+                                <li id="notification_create"><a href="{{url('notification/create')}}">@lang('messages.notifications.create_notification')</a></li>
                             </ul>
                         </li>
                     </ul>

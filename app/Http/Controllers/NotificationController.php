@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notification;
+use App\Models\Client;
 use Illuminate\Http\Request;
+use Validator;
 
 class NotificationController extends Controller
 {
@@ -15,6 +17,7 @@ class NotificationController extends Controller
     public function index()
     {
         $notifications = Notification::all();
+        
         return view('notification.index', compact('notifications'));
     }
 
@@ -26,8 +29,9 @@ class NotificationController extends Controller
     public function create()
     {
         $notification = null;
+        $clients = Client::all();
 
-        return view('notification.form', compact('notification'));
+        return view('notification.form', compact('notification', 'clients'));
     }
 
     /**

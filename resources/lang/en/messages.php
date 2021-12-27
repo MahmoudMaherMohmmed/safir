@@ -455,5 +455,13 @@ return [
         'IBAN' => 'IBAN',
         'image' => 'Image',
     ],
+
+    'notifications'=>[
+        'notifications' => 'Notifications',
+        'create_notification' => 'Send Notification',
+        'client_name' => 'Client Name',
+        'title' => 'Title',
+        'body' => 'Body',
+    ],
     
 ];

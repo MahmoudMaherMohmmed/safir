@@ -448,4 +448,12 @@ return [
         'IBAN' => 'IBAN',
         'image' => 'صورة التحويل',
     ],
+
+    'notifications'=>[
+        'notifications' => 'الاشعارات',
+        'create_notification' => 'ارسال اشعار جديد',
+        'client_name' => 'اسم العميل',
+        'title' => 'عنوان الاشعار',
+        'body' => 'الاشعار',
+    ],
 ];
