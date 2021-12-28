@@ -257,7 +257,7 @@ function emails()
  */
 function sendNotification($device_token, $message)
 {
-    $SERVER_API_KEY = 'AAAAlmTViqc:APA91bG811HA-kSO8zGXgcHFzYNDjzwo-NvU6AjS7p1oKyEW6EoZ14kEZYXAERPqvGscBYv2nZ1-gEnZIbqM7vxiCk49VswSlHpZaiR-EwdnkdRlnsi_HfxhoUWyxvA8H7wPqauPv7F9';
+    $SERVER_API_KEY = 'AAAAuPKs_yo:APA91bE1tb3YFfulphutOObS5o92XnvwrPt9Rq0S_uAMZXiUBikWCMtavnIaBRdSEGJ3PYuh1cWpNsSqaOn3QJa3fCvxZrH1aOFoLfdRmSfKkskExgMLb5JL9dPaPlTykU3x3KEQZln4';
 
     // payload data, it will vary according to requirement
     $data = [
