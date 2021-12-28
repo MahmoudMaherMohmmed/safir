@@ -36,6 +36,9 @@ class ClientController extends Controller
         if ($client) {
             if (Hash::check($request->password, $client->password)) {
                 $token = $client->createToken('API')->accessToken;
+
+                $this->updateDeviceToken($client, $request->device_token);
+
                 $response = ['token' => $token];
                 return response($response, 200);
             } else {
@@ -46,6 +49,13 @@ class ClientController extends Controller
             $response = ["message" =>'User does not exist'];
             return response($response, 403);
         }
+    }
+
+    private function updateDeviceToken($client, $device_token){
+        $client->device_token = $device_token;
+        $client->save();
+
+        return true;
     }
 
     public function register(Request $request)
@@ -60,7 +70,7 @@ class ClientController extends Controller
         if($Validated->fails())
             return response()->json($Validated->messages(), 403);
 
-        $client = Client::create($request->only('name', 'email', 'password', 'phone'));
+        $client = Client::create($request->only('name', 'email', 'password', 'phone', 'device_token'));
 
         $token = $client->createToken('API')->accessToken;
 

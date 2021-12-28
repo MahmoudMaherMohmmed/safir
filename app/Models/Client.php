@@ -25,6 +25,7 @@ class Client extends Authenticatable
         'email',
         'password',
         'phone',
+        'device_token',
     ];
 
     /**
