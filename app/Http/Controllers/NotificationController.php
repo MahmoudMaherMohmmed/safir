@@ -53,6 +53,7 @@ class NotificationController extends Controller
         }
 
         Notification::create( $request->all() );
+        $this->sendNotification($request);
 
         \Session::flash('success', trans('messages.Added Successfully'));
 
@@ -106,5 +107,18 @@ class NotificationController extends Controller
         $notification->delete();
 
         return redirect()->back();
+    }
+
+    private function sendNotification($request){
+        $client = Client::where('id', $request->client_id)->first();
+        
+        if(isset($client) && $client!=null){
+            sendNotification($device_token, array(
+                "title" => $request->title, 
+                "body" => $request->body
+              ));
+        }
+
+        return true;
     }
 }
