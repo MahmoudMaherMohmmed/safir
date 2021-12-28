@@ -113,7 +113,7 @@ class NotificationController extends Controller
         $client = Client::where('id', $request->client_id)->first();
         
         if(isset($client) && $client!=null){
-            sendNotification($device_token, array(
+            sendNotification($client->device_token, array(
                 "title" => $request->title, 
                 "body" => $request->body
               ));
