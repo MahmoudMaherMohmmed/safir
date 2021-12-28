@@ -34,4 +34,15 @@ class MediaController extends Controller
 
         return $media_array;
     }
+
+    public function updateViews(Request $request){
+        $media = Media::where('id', $request->id)->first();
+
+        if(isset($media) && $media!=null){
+            $media->views = $media->views + 1;
+            $media->save();
+        }
+
+        return response()->json(['views' => 'media views updated successfully.'], 200);
+    }
 }

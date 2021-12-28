@@ -30,6 +30,7 @@ Route::get('trip/countries', 'Api\TripController@countries');
 Route::get('trip/{id}/show', 'Api\TripController@show');
 Route::get('countries', 'Api\AppController@countries');
 Route::get('media', 'Api\MediaController@index');
+Route::post('media/views/update', 'Api\MediaController@updateViews');
 Route::get('banks', 'Api\BankController@index');
 Route::get('search/{key}', 'Api\AppController@search');
 
