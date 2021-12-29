@@ -89,7 +89,7 @@ class TripController extends Controller
                 'trip_image' => url($trip->image),
                 'trip_images' => $this->tripImages($trip),
                 'status' => $trip_reservation!=null ? $trip_reservation->status : null,
-                'payment_type' => isset($trip->reservations)&&$trip->reservations!=null ? $trip->reservations->first()->payment_type : null,
+                'payment_type' => $trip_reservation!=null ? $trip_reservation->payment_type : null,
                 'country' => isset($lang) && $lang!=null ? $trip->country->getTranslation('title', $lang) : $trip->country->title,
                 'category' => isset($lang) && $lang!=null ? $trip->category->getTranslation('title', $lang) : $trip->category->title,
             ];
