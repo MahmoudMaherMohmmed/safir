@@ -247,8 +247,8 @@ class TripController extends Controller
         
         if(isset($client) && $client!=null){
             sendNotification($client->device_token, array(
-                "title" => "test", 
-                "body" => "test hello world"
+                "title" => 'test', 
+                "body" => 'test hello world',
               ));
         }
 
