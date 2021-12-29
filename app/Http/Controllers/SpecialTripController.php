@@ -58,7 +58,7 @@ class SpecialTripController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        SpecialTrip::create( $request->all() );
+        $special_trip = SpecialTrip::create( $request->all() );
 
         $this->sendNotification($special_trip);
 
@@ -147,11 +147,11 @@ class SpecialTripController extends Controller
         $notification = [];
 
         if($special_trip->status == 0){
-            $notification = ["title" => 'اضافة طلب البرنامج الخاص', "body" => "تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن."];
+            $notification = ["title" => 'اضافة طلب البرنامج الخاص', "body" => 'تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن.'];
         }elseif($special_trip->status == 1){
-            $notification = ["title" => 'قبول طلب البرنامج الخاص', "body" => "تم قبول طلبك بنجاح يمكنك الان مراجعة طلبك فى طلباتى الخاصة وسيتم التواصل معكم لمناقشة برنامج الرحلة الخاصه بيكم."];
+            $notification = ["title" => 'قبول طلب البرنامج الخاص', "body" => 'تم قبول طلبك بنجاح يمكنك الان مراجعة طلبك فى طلباتى الخاصة وسيتم التواصل معكم لمناقشة برنامج الرحلة الخاصه بيكم.'];
         }else{
-            $notification = ["title" => 'الغاء البرنامج الخاص', "body" => "تم الغاء برنامجكم الخاص يرجى محاولت اضافة برنامج اخر او التواصل مع الاداره من خلال الارقام الموضحه فى التطبيق للاستفسار عن اسباب عدم قبول البرنامج."];
+            $notification = ["title" => 'الغاء البرنامج الخاص', "body" => 'تم الغاء برنامجكم الخاص يرجى محاولت اضافة برنامج اخر او التواصل مع الاداره من خلال الارقام الموضحه فى التطبيق للاستفسار عن اسباب عدم قبول البرنامج.'];
         }
         
         if(isset($client) && $client!=null){

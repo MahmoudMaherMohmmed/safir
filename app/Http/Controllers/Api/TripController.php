@@ -126,7 +126,9 @@ class TripController extends Controller
         if($Validated->fails())
             return response()->json($Validated->messages(), 403); 
 
-        SpecialTrip::create( array_merge($request->all(), ['client_id' => $request->user()->id]) );
+        $special_trip = SpecialTrip::create( array_merge($request->all(), ['client_id' => $request->user()->id]) );
+
+        $this->sendSpecialTripNotification($special_trip);
 
         return response()->json(['message' => 'Your request registered successfully.'], 200);
     }
@@ -150,6 +152,8 @@ class TripController extends Controller
                 if($reservation->payment_type == 0){
                     $this->saveBankTransfer($request, $reservation->id);
                 }
+
+                $this->sendReservationNotification($reservation);
 
                 return response()->json(['message' => 'appointment reserved successfully.'], 200);
             }else{
@@ -216,6 +220,44 @@ class TripController extends Controller
             $bank_transfer->IBAN = $bank->IBAN;
             $bank_transfer->image = $this->handleFile($request['image']);
             $bank_transfer->save();
+        }
+
+        return true;
+    }
+
+    private function sendSpecialTripNotification($special_trip){
+        $client = Client::where('id', $special_trip->client_id)->first();
+        $notification = [];
+
+        if($special_trip->status == 0){
+            $notification = ["title" => 'اضافة طلب البرنامج الخاص', "body" => 'تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن.'];
+        }elseif($special_trip->status == 1){
+            $notification = ["title" => 'قبول طلب البرنامج الخاص', "body" => 'تم قبول طلبك بنجاح يمكنك الان مراجعة طلبك فى طلباتى الخاصة وسيتم التواصل معكم لمناقشة برنامج الرحلة الخاصه بيكم.'];
+        }else{
+            $notification = ["title" => 'الغاء البرنامج الخاص', "body" => 'تم الغاء برنامجكم الخاص يرجى محاولت اضافة برنامج اخر او التواصل مع الاداره من خلال الارقام الموضحه فى التطبيق للاستفسار عن اسباب عدم قبول البرنامج.'];
+        }
+        
+        if(isset($client) && $client!=null){
+            sendNotification($client->device_token, $notification);
+        }
+
+        return true;
+    }
+
+    private function sendReservationNotification($reservation){
+        $client = Client::where('id', $reservation->client_id)->first();
+        $notification = [];
+
+        if($reservation->status == 1){
+            $notification = ["title" => 'اضافة الطلب', "body" => 'تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن.'];
+        }elseif($reservation->status == 2){
+            $notification = ["title" => 'قبول الطلب', "body" => 'تم قبول طلبك بنجاح يمكنك الان مراجعة طلبك فى حجوزاتى وسيتم التواصل معكم قبيل الرحله مباشر.'];
+        }else{
+            $notification = ["title" => 'الغاء الطلب', "body" => 'تم الغاء طلبكم يرجى محاولت اضافة الرحله مره اخرى او التواصل مع الاداره من خلال الارقام الموضحه فى التطبيق للاستفسار عن اسباب عدم قبول الطلب.'];
+        }
+        
+        if(isset($client) && $client!=null){
+            sendNotification($client->device_token, $notification);
         }
 
         return true;
