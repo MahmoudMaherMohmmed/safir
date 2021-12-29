@@ -247,8 +247,9 @@ class TripController extends Controller
         
         if(isset($client) && $client!=null){
             sendNotification($client->device_token, array(
-                "title" => "اضافة الطلب", 
-                "body" => "تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن"
+                "title" => 'اضافة الطلب', 
+                "body" => 'hello',
+                //"body" => "تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن"
               )
             );
         }
