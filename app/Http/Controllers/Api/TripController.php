@@ -10,6 +10,7 @@ use App\Models\SpecialTrip;
 use App\Models\Reservation;
 use App\Models\Bank;
 use App\Models\BankTransfer;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Services\UploaderService;
