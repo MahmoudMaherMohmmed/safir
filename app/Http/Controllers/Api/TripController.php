@@ -231,7 +231,11 @@ class TripController extends Controller
         $client = Client::where('id', $special_trip->client_id)->first();
         
         if(isset($client) && $client!=null){
-            sendNotification($client->device_token, array("title" => 'اضافة طلب البرنامج الخاص', "body" => 'تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن.') );
+            sendNotification($client->device_token, array(
+                "title" => "اضافة طلب البرنامج الخاص",
+                "body" => "تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن"
+                ) 
+            );
         }
 
         return true;
@@ -242,7 +246,11 @@ class TripController extends Controller
         
         
         if(isset($client) && $client!=null){
-            sendNotification($client->device_token, array("title" => 'اضافة الطلب', "body" => 'تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن.') );
+            sendNotification($client->device_token, array(
+                "title" => "اضافة الطلب", 
+                "body" => "تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن"
+              )
+            );
         }
 
         return true;
