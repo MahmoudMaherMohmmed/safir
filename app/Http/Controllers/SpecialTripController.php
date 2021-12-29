@@ -60,6 +60,8 @@ class SpecialTripController extends Controller
 
         SpecialTrip::create( $request->all() );
 
+        $this->sendNotification($special_trip);
+
         \Session::flash('success', trans('messages.Added Successfully'));
 
         return redirect('/special_trip');
@@ -119,6 +121,8 @@ class SpecialTripController extends Controller
         $special_trip->description = $request->description;
         $special_trip->status = $request->status;
         $special_trip->save();
+
+        $this->sendNotification($special_trip);
         
         \Session::flash('success', trans('messages.updated successfully'));
         return redirect('/special_trip');
@@ -136,5 +140,24 @@ class SpecialTripController extends Controller
         $special_trip->delete();
 
         return redirect()->back();
+    }
+
+    private function sendNotification($special_trip){
+        $client = Client::where('id', $special_trip->client_id)->first();
+        $notification = [];
+
+        if($special_trip->status == 0){
+            $notification = ["title" => 'اضافة طلب البرنامج الخاص', "body" => "تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن."];
+        }elseif($special_trip->status == 1){
+            $notification = ["title" => 'قبول طلب البرنامج الخاص', "body" => "تم قبول طلبك بنجاح يمكنك الان مراجعة طلبك فى طلباتى الخاصة وسيتم التواصل معكم لمناقشة برنامج الرحلة الخاصه بيكم."];
+        }else{
+            $notification = ["title" => 'الغاء البرنامج الخاص', "body" => "تم الغاء برنامجكم الخاص يرجى محاولت اضافة برنامج اخر او التواصل مع الاداره من خلال الارقام الموضحه فى التطبيق للاستفسار عن اسباب عدم قبول البرنامج."];
+        }
+        
+        if(isset($client) && $client!=null){
+            sendNotification($client->device_token, $notification);
+        }
+
+        return true;
     }
 }
