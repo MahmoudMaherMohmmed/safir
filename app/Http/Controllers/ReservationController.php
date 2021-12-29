@@ -138,14 +138,14 @@ class ReservationController extends Controller
 
     private function sendNotification($reservation){
         $client = Client::where('id', $reservation->client_id)->first();
-        $notification = [];
+        $notification = null;
 
         if($reservation->status == 1){
-            $notification = ["title" => 'اضافة الطلب', "body" => 'تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن.'];
+            $notification = array("title" => 'اضافة الطلب', "body" => 'تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن.');
         }elseif($reservation->status == 2){
-            $notification = ["title" => 'قبول الطلب', "body" => 'تم قبول طلبك بنجاح يمكنك الان مراجعة طلبك فى حجوزاتى وسيتم التواصل معكم قبيل الرحله مباشر.'];
+            $notification = array("title" => 'قبول الطلب', "body" => 'تم قبول طلبك بنجاح يمكنك الان مراجعة طلبك فى حجوزاتى وسيتم التواصل معكم قبيل الرحله مباشر.');
         }else{
-            $notification = ["title" => 'الغاء الطلب', "body" => 'تم الغاء طلبكم يرجى محاولت اضافة الرحله مره اخرى او التواصل مع الاداره من خلال الارقام الموضحه فى التطبيق للاستفسار عن اسباب عدم قبول الطلب.'];
+            $notification = array("title" => 'الغاء الطلب', "body" => 'تم الغاء طلبكم يرجى محاولت اضافة الرحله مره اخرى او التواصل مع الاداره من خلال الارقام الموضحه فى التطبيق للاستفسار عن اسباب عدم قبول الطلب.');
         }
         
         if(isset($client) && $client!=null){
