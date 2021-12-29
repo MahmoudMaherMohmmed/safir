@@ -63,6 +63,8 @@ class ReservationController extends Controller
         $reservation->fill($request->all());
         $reservation->save();
 
+        $this->sendNotification($reservation);
+
         \Session::flash('success', trans('messages.Added Successfully'));
         return redirect('/reservation');
     }
@@ -114,6 +116,8 @@ class ReservationController extends Controller
         $reservation->fill($request->all());
         $reservation->save();
 
+        $this->sendNotification($reservation);
+
         \Session::flash('success', trans('messages.updated successfully'));
         return redirect('/reservation');
     }
@@ -130,6 +134,25 @@ class ReservationController extends Controller
         $reservation->delete();
 
         return redirect()->back();
+    }
+
+    private function sendNotification($reservation){
+        $client = Client::where('id', $reservation->client_id)->first();
+        $notification = [];
+
+        if($reservation->status == 1){
+            $notification = ["title" => 'اضافة الطلب', "body" => "تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن."];
+        }elseif($reservation->status == 2){
+            $notification = ["title" => 'قبول الطلب', "body" => "تم قبول طلبك بنجاح يمكنك الان مراجعة طلبك فى حجوزاتى وسيتم التواصل معكم قبيل الرحله مباشر."];
+        }else{
+            $notification = ["title" => 'الغاء الطلب', "body" => "تم الغاء طلبكم يرجى محاولت اضافة الرحله مره اخرى او التواصل مع الاداره من خلال الارقام الموضحه فى التطبيق للاستفسار عن اسباب عدم قبول الطلب."];
+        }
+        
+        if(isset($client) && $client!=null){
+            sendNotification($client->device_token, $notification);
+        }
+
+        return true;
     }
 
 }
