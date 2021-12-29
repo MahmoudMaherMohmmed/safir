@@ -76,6 +76,7 @@ class TripController extends Controller
         $trip_array = [];
  
         if(isset($trip) && $trip!=null){
+            $trip_reservation = isset($trip->reservations)&&$trip->reservations!=null ? $trip->reservations->first() : null;
             $trip_array = [
                 'trip_id' => $trip->id,
                 'trip_title' => isset($lang) && $lang!=null ? $trip->getTranslation('name', $lang) : $trip->name,
@@ -87,7 +88,7 @@ class TripController extends Controller
                 'trip_persons_count' => $trip->persons_count,
                 'trip_image' => url($trip->image),
                 'trip_images' => $this->tripImages($trip),
-                'status' => isset($trip->reservations)&&$trip->reservations!=null ? $trip->reservations->first()->status : null,
+                'status' => $trip_reservation!=null ? $trip_reservation->status : null,
                 'payment_type' => isset($trip->reservations)&&$trip->reservations!=null ? $trip->reservations->first()->payment_type : null,
                 'country' => isset($lang) && $lang!=null ? $trip->country->getTranslation('title', $lang) : $trip->country->title,
                 'category' => isset($lang) && $lang!=null ? $trip->category->getTranslation('title', $lang) : $trip->category->title,
