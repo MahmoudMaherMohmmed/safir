@@ -53,11 +53,11 @@
                                                 <td> {{ $value->bankTransfer!=null ? ($value->payment_type==0 ? 'تحويل بنكى' : 'دفع الالكترونى') : '---'}} </td>
                                                 <td>
                                                     @if($value->status==2)
-                                                        'تم الموافقه عليه'
+                                                        تم الموافقه عليه
                                                     @elseif($value->status==1)
-                                                        'قيد المراجعه'
+                                                        قيد المراجعه
                                                     @else
-                                                        'تم الالغاء'
+                                                        تم الالغاء
                                                     @endif
                                                 </td>
                                                 <td class="visible-md visible-xs visible-sm visible-lg">
