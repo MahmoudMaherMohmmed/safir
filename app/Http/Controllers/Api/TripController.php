@@ -41,7 +41,7 @@ class TripController extends Controller
         $client_id = $request->user()->id;
         $reservations_array = [];
 
-        $reservations = Reservation::where('client_id', $client_id)->whereDate('to', '>', Carbon::now())->get();
+        $reservations = Reservation::where('client_id', $client_id)->whereDate('to', '>=', date('Y-m-d'))->get();
         if(isset($reservations) && $reservations!=null){
             foreach($reservations as $reservation){
                 if(isset($reservation->trip) && $reservation->trip!=null)
@@ -58,7 +58,7 @@ class TripController extends Controller
         $client_id = $request->user()->id;
         $reservations_array = [];
 
-        $reservations = Reservation::where('client_id', $client_id)->whereDate('to', '<', Carbon::now())->where('status', '!=', 1)->get();
+        $reservations = Reservation::where('client_id', $client_id)->whereDate('to', '<', date('Y-m-d'))->where('status', '!=', 1)->get();
         if(isset($reservations) && $reservations!=null){
             foreach($reservations as $reservation){
                 if(isset($reservation->trip) && $reservation->trip!=null)
