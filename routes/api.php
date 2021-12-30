@@ -33,6 +33,7 @@ Route::get('media', 'Api\MediaController@index');
 Route::post('media/views/update', 'Api\MediaController@updateViews');
 Route::get('banks', 'Api\BankController@index');
 Route::get('search/{key}', 'Api\AppController@search');
+Route::post('language/update', 'Api\AppController@changeLanguage');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('profile', 'Api\ClientController@profile');

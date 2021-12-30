@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Validator;
 use Mail;
+use App;
 
 class AppController extends Controller
 {
@@ -176,6 +177,19 @@ class AppController extends Controller
         }
 
         return $trip_images_array;
+    }
+
+    public function changeLanguage(Request $request){
+        $Validated = Validator::make($request->all(), [
+            'language' => 'required',
+        ]);
+
+        if($Validated->fails())
+            return response()->json($Validated->messages(), 403);
+
+        App::setLocale($request->language);
+
+        return response()->json(['message' => 'language changed successfully.'], 200);
     }
     
 }
