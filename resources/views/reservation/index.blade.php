@@ -73,16 +73,14 @@
                                                                 href='{{ url("bank_transfer/$bank_transfer->id") }}'
                                                                 title="Edit"><i class="fa fa-eye"></i></a>
                                                         @endif
-                                                        @if ($value->status==0)
-                                                            <form action="{{ route('reservation.destroy', $value->id) }}"
-                                                                method="POST" style="display: initial;">
-                                                                @method('DELETE')
-                                                                @csrf
-                                                                <button type="submit" class="btn btn-sm btn-danger"
-                                                                    style="height: 28px;"><i
-                                                                        class="fa fa-trash"></i></button>
-                                                            </form>
-                                                        @endif
+                                                        <form action="{{ route('reservation.destroy', $value->id) }}"
+                                                            method="POST" style="display: initial;">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-sm btn-danger"
+                                                                style="height: 28px;"><i
+                                                                    class="fa fa-trash"></i></button>
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>
