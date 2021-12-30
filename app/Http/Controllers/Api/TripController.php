@@ -37,6 +37,30 @@ class TripController extends Controller
         return response()->json(['trip' => $this->formatTrip($trip, $request->lang)], 200);
     }
 
+    private function formatTrip($trip, $lang)
+    {
+        $trip_array = [];
+ 
+        if(isset($trip) && $trip!=null){
+            $trip_array = [
+                'trip_id' => $trip->id,
+                'trip_title' => isset($lang) && $lang!=null ? $trip->getTranslation('name', $lang) : $trip->name,
+                'trip_description' => isset($lang) && $lang!=null ? $trip->getTranslation('description', $lang) : $trip->description,
+                'trip_price' => $trip->price,
+                'trip_start_date' => $trip->from,
+                'trip_end_date' => $trip->to,
+                'trip_duration' => $this->getTripDuration($trip->from, $trip->to),
+                'trip_persons_count' => $trip->persons_count,
+                'trip_image' => url($trip->image),
+                'trip_images' => $this->tripImages($trip),
+                'country' => isset($lang) && $lang!=null ? $trip->country->getTranslation('title', $lang) : $trip->country->title,
+                'category' => isset($lang) && $lang!=null ? $trip->category->getTranslation('title', $lang) : $trip->category->title,
+            ];
+        }
+
+        return $trip_array;
+    }
+
     public function clientCurrentReservations(Request $request){
         $client_id = $request->user()->id;
         $reservations_array = [];
@@ -46,7 +70,7 @@ class TripController extends Controller
             foreach($reservations as $reservation){
                 if((isset($reservation->trip) && $reservation->trip!=null) && $reservation->trip->to >= date('Y-m-d'))
                 {
-                    array_push($reservations_array, $this->formatTrip($reservation->trip, $request->lang));
+                    array_push($reservations_array, $this->formatMyReservationTrip($reservation, $request->lang));
                 }
             }
         }
@@ -63,7 +87,7 @@ class TripController extends Controller
             foreach($reservations as $reservation){
                 if((isset($reservation->trip) && $reservation->trip!=null) && $reservation->trip->to < date('Y-m-d'))
                 {
-                    array_push($reservations_array, $this->formatTrip($reservation->trip, $request->lang));
+                    array_push($reservations_array, $this->formatMyReservationTrip($reservation, $request->lang));
                 }
             }
         }
@@ -71,12 +95,12 @@ class TripController extends Controller
         return response()->json(['reservations' => $reservations_array], 200);
     }
 
-    private function formatTrip($trip, $lang)
+    private function formatMyReservationTrip($reservation, $lang)
     {
         $trip_array = [];
+        $trip = $reservation->trip;
  
         if(isset($trip) && $trip!=null){
-            $trip_reservation = isset($trip->reservations)&&$trip->reservations!=null ? $trip->reservations->first() : null;
             $trip_array = [
                 'trip_id' => $trip->id,
                 'trip_title' => isset($lang) && $lang!=null ? $trip->getTranslation('name', $lang) : $trip->name,
@@ -88,8 +112,8 @@ class TripController extends Controller
                 'trip_persons_count' => $trip->persons_count,
                 'trip_image' => url($trip->image),
                 'trip_images' => $this->tripImages($trip),
-                'status' => $trip_reservation!=null ? $trip_reservation->status : null,
-                'payment_type' => $trip_reservation!=null ? $trip_reservation->payment_type : null,
+                'status' => $reservation->status,
+                'payment_type' => $reservation->payment_type,
                 'country' => isset($lang) && $lang!=null ? $trip->country->getTranslation('title', $lang) : $trip->country->title,
                 'category' => isset($lang) && $lang!=null ? $trip->category->getTranslation('title', $lang) : $trip->category->title,
             ];
@@ -97,6 +121,7 @@ class TripController extends Controller
 
         return $trip_array;
     }
+
 
     private function getTripDuration($start_date, $end_date)
     {
