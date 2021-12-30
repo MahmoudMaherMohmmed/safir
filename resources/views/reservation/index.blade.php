@@ -51,7 +51,15 @@
                                                 <td> {{ $value->client->name }} </td>
                                                 <td> {{ $value->trip->getTranslation('name', Session::get('applocale')) }} </td>
                                                 <td> {{ $value->bankTransfer!=null ? ($value->payment_type==0 ? 'تحويل بنكى' : 'دفع الالكترونى') : '---'}} </td>
-                                                <td> {{ $value->status==1 ? 'قيد المراجعه' : 'تم الموافقه' }} </td>
+                                                <td>
+                                                    @if($value->status==2)
+                                                        'تم الموافقه عليه'
+                                                    @elseif($value->status==1)
+                                                        'قيد المراجعه'
+                                                    @else
+                                                        'تم الالغاء'
+                                                    @endif
+                                                </td>
                                                 <td class="visible-md visible-xs visible-sm visible-lg">
                                                     <div class="btn-group">
                                                         @if (get_action_icons('reservation/{id}/edit', 'get'))
