@@ -198,15 +198,17 @@ class TripController extends Controller
         $special_trips = specialTrip::where('client_id', $client_id)->get();
         if(isset($special_trips) && $special_trips!=null){
             foreach($special_trips as $trip){
-                array_push($special_trips_array, [
-                    'id' => $trip->id,
-                    'start_date' => $trip->start_date,
-                    'duration' => $trip->days_count,
-                    'persons_count' => $trip->persons_count,
-                    'status' => $trip->status,
-                    'country' => isset($lang) && $lang!=null ? $trip->country->getTranslation('title', $lang) : $trip->country->title,
-                    'category' => isset($lang) && $lang!=null && $lang=='ar' ? 'رحلات خاصة' : 'Special Trip',
-                ]);
+                if($this->specialTripEndDate($trip) >= date('Y-m-d')){
+                    array_push($special_trips_array, [
+                        'id' => $trip->id,
+                        'start_date' => $trip->start_date,
+                        'duration' => $trip->days_count,
+                        'persons_count' => $trip->persons_count,
+                        'status' => $trip->status,
+                        'country' => isset($lang) && $lang!=null ? $trip->country->getTranslation('title', $lang) : $trip->country->title,
+                        'category' => isset($lang) && $lang!=null && $lang=='ar' ? 'رحلات خاصة' : 'Special Trip',
+                    ]);
+                }
             }
         }
 
@@ -220,19 +222,25 @@ class TripController extends Controller
         $special_trips = specialTrip::where('client_id', $client_id)->where('status', '!=', 1)->get();
         if(isset($special_trips) && $special_trips!=null){
             foreach($special_trips as $trip){
-                array_push($special_trips_array, [
-                    'id' => $trip->id,
-                    'start_date' => $trip->start_date,
-                    'duration' => $trip->days_count,
-                    'persons_count' => $trip->persons_count,
-                    'status' => $trip->status,
-                    'country' => isset($lang) && $lang!=null ? $trip->country->getTranslation('title', $lang) : $trip->country->title,
-                    'category' => isset($lang) && $lang!=null && $lang=='ar' ? 'رحلات خاصة' : 'Special Trip',
-                ]);
+                if($this->specialTripEndDate($trip) < date('Y-m-d')){
+                    array_push($special_trips_array, [
+                        'id' => $trip->id,
+                        'start_date' => $trip->start_date,
+                        'duration' => $trip->days_count,
+                        'persons_count' => $trip->persons_count,
+                        'status' => $trip->status,
+                        'country' => isset($lang) && $lang!=null ? $trip->country->getTranslation('title', $lang) : $trip->country->title,
+                        'category' => isset($lang) && $lang!=null && $lang=='ar' ? 'رحلات خاصة' : 'Special Trip',
+                    ]);
+                }
             }
         }
 
         return response()->json(['special_trips' => $special_trips_array], 200);
+    }
+
+    private function specialTripEndDate($trip){
+        return Carbon::parse($trip->start_date)->addDays($trip->days_count)->format('Y-m-d');
     }
 
     private function saveBankTransfer($request, $reservation_id){
