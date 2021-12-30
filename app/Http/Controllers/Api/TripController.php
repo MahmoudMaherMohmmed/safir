@@ -41,10 +41,10 @@ class TripController extends Controller
         $client_id = $request->user()->id;
         $reservations_array = [];
 
-        $reservations = Reservation::where('client_id', $client_id)->whereDate('to', '>=', date('Y-m-d'))->get();
+        $reservations = Reservation::where('client_id', $client_id)->get();
         if(isset($reservations) && $reservations!=null){
             foreach($reservations as $reservation){
-                if(isset($reservation->trip) && $reservation->trip!=null)
+                if((isset($reservation->trip) && $reservation->trip!=null) && $reservation->trip->to >= date('Y-m-d'))
                 {
                     array_push($reservations_array, $this->formatTrip($reservation->trip, $request->lang));
                 }
@@ -58,10 +58,10 @@ class TripController extends Controller
         $client_id = $request->user()->id;
         $reservations_array = [];
 
-        $reservations = Reservation::where('client_id', $client_id)->whereDate('to', '<', date('Y-m-d'))->where('status', '!=', 1)->get();
+        $reservations = Reservation::where('client_id', $client_id)->where('status', '!=', 1)->get();
         if(isset($reservations) && $reservations!=null){
             foreach($reservations as $reservation){
-                if(isset($reservation->trip) && $reservation->trip!=null)
+                if((isset($reservation->trip) && $reservation->trip!=null) && $reservation->trip->to < date('Y-m-d'))
                 {
                     array_push($reservations_array, $this->formatTrip($reservation->trip, $request->lang));
                 }
