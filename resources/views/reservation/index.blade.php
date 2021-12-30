@@ -73,7 +73,7 @@
                                                                 href='{{ url("bank_transfer/$bank_transfer->id") }}'
                                                                 title="Edit"><i class="fa fa-eye"></i></a>
                                                         @endif
-                                                        <!-- @if (get_action_icons('reservation/{id}/delete', 'get'))
+                                                        @if ($value->status==0)
                                                             <form action="{{ route('reservation.destroy', $value->id) }}"
                                                                 method="POST" style="display: initial;">
                                                                 @method('DELETE')
@@ -82,7 +82,7 @@
                                                                     style="height: 28px;"><i
                                                                         class="fa fa-trash"></i></button>
                                                             </form>
-                                                        @endif -->
+                                                        @endif
                                                     </div>
                                                 </td>
                                             </tr>
