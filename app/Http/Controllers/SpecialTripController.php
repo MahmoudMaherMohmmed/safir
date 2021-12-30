@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SpecialTrip;
+use App\Models\Notification;
 use App\Models\Country;
 use App\Models\Client;
 use Illuminate\Http\Request;
@@ -145,18 +146,39 @@ class SpecialTripController extends Controller
     private function sendNotification($special_trip){
         $client = Client::where('id', $special_trip->client_id)->first();
         $notification = null;
+        $title = null;
+        $body = null;
 
         if($special_trip->status == 0){
-            $notification = array("title" => 'اضافة طلب البرنامج الخاص', "body" => 'تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن.');
+            $title = 'اضافة طلب البرنامج الخاص';
+            $body = 'تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن.';
+            $notification = array("title" => $title, "body" => $body);
+        
         }elseif($special_trip->status == 1){
-            $notification = array("title" => 'قبول طلب البرنامج الخاص', "body" => 'تم قبول طلبك بنجاح يمكنك الان مراجعة طلبك فى طلباتى الخاصة وسيتم التواصل معكم لمناقشة برنامج الرحلة الخاصه بيكم.');
+            $title = 'قبول طلب البرنامج الخاص';
+            $body = 'تم قبول طلبك بنجاح يمكنك الان مراجعة طلبك فى طلباتى الخاصة وسيتم التواصل معكم لمناقشة برنامج الرحلة الخاصه بيكم.';
+            $notification = array("title" => $title, "body" => $body);
+        
         }else{
-            $notification = array("title" => 'الغاء البرنامج الخاص', "body" => 'تم الغاء برنامجكم الخاص يرجى محاولت اضافة برنامج اخر او التواصل مع الاداره من خلال الارقام الموضحه فى التطبيق للاستفسار عن اسباب عدم قبول البرنامج.');
+            $title = 'الغاء البرنامج الخاص';
+            $body = 'تم الغاء برنامجكم الخاص يرجى محاولت اضافة برنامج اخر او التواصل مع الاداره من خلال الارقام الموضحه فى التطبيق للاستفسار عن اسباب عدم قبول البرنامج.';
+            $notification = array("title" => $title, "body" => $body);
         }
         
         if(isset($client) && $client!=null){
             sendNotification($client->device_token, $notification);
+            $this->saveNotifications($client->id, $title, $body);
         }
+
+        return true;
+    }
+
+    private function saveNotifications($client_id, $title, $body){
+        $notification = new Notification();
+        $notification->client_id = $client_id;
+        $notification->title = $title;
+        $notification->body = $body;
+        $notification->save();
 
         return true;
     }

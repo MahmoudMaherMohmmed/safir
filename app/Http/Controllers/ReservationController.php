@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use App\Models\Notification;
 use App\Models\Client;
 use App\Models\Trip;
 use Illuminate\Http\Request;
@@ -139,18 +140,38 @@ class ReservationController extends Controller
     private function sendNotification($reservation){
         $client = Client::where('id', $reservation->client_id)->first();
         $notification = null;
+        $title = null;
+        $body = null;
 
         if($reservation->status == 1){
-            $notification = array("title" => 'اضافة الطلب', "body" => 'تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن.');
+            $title = 'اضافة الطلب';
+            $body = 'تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن.';
+            $notification = array("title" => $title, "body" => $body);
+
         }elseif($reservation->status == 2){
-            $notification = array("title" => 'قبول الطلب', "body" => 'تم قبول طلبك بنجاح يمكنك الان مراجعة طلبك فى حجوزاتى وسيتم التواصل معكم قبيل الرحله مباشر.');
+            $title = 'قبول الطلب';
+            $body = 'تم قبول طلبك بنجاح يمكنك الان مراجعة طلبك فى حجوزاتى وسيتم التواصل معكم قبيل الرحله مباشر.';
+            $notification = array("title" => $title, "body" => $body);
         }else{
-            $notification = array("title" => 'الغاء الطلب', "body" => 'تم الغاء طلبكم يرجى محاولت اضافة الرحله مره اخرى او التواصل مع الاداره من خلال الارقام الموضحه فى التطبيق للاستفسار عن اسباب عدم قبول الطلب.');
+            $title = 'الغاء الطلب';
+            $body = 'تم الغاء طلبكم يرجى محاولت اضافة الرحله مره اخرى او التواصل مع الاداره من خلال الارقام الموضحه فى التطبيق للاستفسار عن اسباب عدم قبول الطلب.';
+            $notification = array("title" => $title, "body" => $body);
         }
         
         if(isset($client) && $client!=null){
             sendNotification($client->device_token, $notification);
+            $this->saveNotifications($client->id, $title, $body);
         }
+
+        return true;
+    }
+
+    private function saveNotifications($client_id, $title, $body){
+        $notification = new Notification();
+        $notification->client_id = $client_id;
+        $notification->title = $title;
+        $notification->body = $body;
+        $notification->save();
 
         return true;
     }

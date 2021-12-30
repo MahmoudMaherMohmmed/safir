@@ -10,6 +10,7 @@ use App\Models\SpecialTrip;
 use App\Models\Reservation;
 use App\Models\Bank;
 use App\Models\BankTransfer;
+use App\Models\Notification;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -264,11 +265,16 @@ class TripController extends Controller
         $client = Client::where('id', $special_trip->client_id)->first();
         
         if(isset($client) && $client!=null){
+            $title = "اضافة طلب البرنامج الخاص";
+            $body = "تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن";
+
             sendNotification($client->device_token, array(
-                "title" => "اضافة طلب البرنامج الخاص",
-                "body" => "تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن"
+                "title" => $title,
+                "body" => $body
                 ) 
             );
+
+            $this->saveNotifications($client->id, $title, $body);
         }
 
         return true;
@@ -279,12 +285,27 @@ class TripController extends Controller
         
         
         if(isset($client) && $client!=null){
+            $title = 'اضافة الطلب';
+            $body = "تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن";
+
             sendNotification($client->device_token, array(
-                "title" => 'اضافة الطلب', 
-                "body" => "تم اضافة طلبك بنجاح سيتم مراجعة الطلب والتواصل معكم فى اقرب وقت ممكن"
+                "title" => $title, 
+                "body" => $body
               )
             );
+
+            $this->saveNotifications($client->id, $title, $body);
         }
+
+        return true;
+    }
+
+    private function saveNotifications($client_id, $title, $body){
+        $notification = new Notification();
+        $notification->client_id = $client_id;
+        $notification->title = $title;
+        $notification->body = $body;
+        $notification->save();
 
         return true;
     }
