@@ -42,11 +42,11 @@ class ClientController extends Controller
                 $response = ['token' => $token];
                 return response($response, 200);
             } else {
-                $response = ["message" => "Password mismatch"];
+                $response = ["message" => trans('api.password')];
                 return response($response, 403);
             }
         } else {
-            $response = ["message" =>'User does not exist'];
+            $response = ["message" => trans('api.user_does_not_exist')]; 
             return response($response, 403);
         }
     }
@@ -99,7 +99,7 @@ class ClientController extends Controller
         $updated_client->fill($request->only('name', 'email', 'phone'));
         $updated_client->update();
         
-        return response()->json(['messaage' => 'Your profile updated successfully.', 'user' => $this->formatUser($updated_client)], 200);
+        return response()->json(['messaage' => trans('api.update_profile'), 'user' => $this->formatUser($updated_client)], 200);
     }
 
     public function updateProfileImage(Request $request){
@@ -118,7 +118,7 @@ class ClientController extends Controller
         }
         $updated_client->update();
 
-        return response()->json(['messaage' => 'Your profile updated successfully.', 'user' => $this->formatUser($updated_client)], 200);
+        return response()->json(['messaage' => trans('api.update_profile'), 'user' => $this->formatUser($updated_client)], 200);
     }
 
     public function updatePassword(Request $request){
@@ -139,13 +139,13 @@ class ClientController extends Controller
                 $update_client->password = $request->new_password;
                 $update_client->save();
 
-                return response(["message" => "Your password changed successfully."], 200);
+                return response(["message" => trans('api.password_changed_successfully')], 200);
             } else {
-                $response = ["message" => "Old password is wrong."];
+                $response = ["message" => trans('api.wrong_password')];
                 return response($response, 403);
             }
         } else {
-            $response = ["message" =>'User does not exist.'];
+            $response = ["message" => trans('api.user_does_not_exist')];
             return response($response, 403);
         }
     }
@@ -166,7 +166,7 @@ class ClientController extends Controller
     {
         $request->user()->token()->revoke();
 
-        return response()->json(['message' => 'Successfully logged out'], 200);
+        return response()->json(['message' => trans('api.password')], 200);
     }
 
        /**
