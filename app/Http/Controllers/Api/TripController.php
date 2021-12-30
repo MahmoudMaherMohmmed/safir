@@ -102,7 +102,7 @@ class TripController extends Controller
  
         if(isset($trip) && $trip!=null){
             $trip_array = [
-                'trip_id' => $trip->id,
+                'trip_id' => $reservation->id,
                 'trip_title' => isset($lang) && $lang!=null ? $trip->getTranslation('name', $lang) : $trip->name,
                 'trip_description' => isset($lang) && $lang!=null ? $trip->getTranslation('description', $lang) : $trip->description,
                 'trip_price' => $trip->price,
