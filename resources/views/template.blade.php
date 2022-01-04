@@ -260,7 +260,7 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                     </li>
                     @endif -->
 
-                    @if (get_action_icons('setting', 'get'))
+                    <!-- @if (get_action_icons('setting', 'get'))
                     <li id="images">
                         <a href="#" class="dropdown-toggle">
                             <i class="glyphicon glyphicon-fullscreen"></i>
@@ -268,14 +268,12 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             <b class="arrow fa fa-angle-right"></b>
                         </a>
 
-                        <!-- BEGIN Submenu -->
                         <ul class="submenu">
                             <li id="upload_resize"><a href="{{url('upload_resize')}}">@lang('messages.Image.Upload/Resize Image')</a></li>
                             <li id="upload_resize_v2"><a href="{{url('upload_resize_v2')}}">@lang('messages.Image.Upload/Resize Image') V2</a></li>
                         </ul>
-                        <!-- END Submenu -->
                     </li>
-                    @endif
+                    @endif -->
 
                     @if (get_action_icons('language', 'get'))
                     <ul class="nav nav-list">
