@@ -8,6 +8,7 @@ use App\Models\Term;
 use App\Models\Center;
 use App\Models\Country;
 use App\Models\Trip;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
