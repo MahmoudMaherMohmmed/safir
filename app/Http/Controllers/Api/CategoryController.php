@@ -36,9 +36,16 @@ class CategoryController extends Controller
     public function categoryTrips(Request $request, $category_id, $country_id)
     {
         $lang = $request->lang;
-        $trips = Trip::where('category_id', $category_id)
+        if($country_id != 0){
+            $trips = Trip::where('category_id', $category_id)
                         ->where('country_id', $country_id)
                         ->get();
+        }else{
+            $trips = Trip::where('category_id', $category_id)
+                    ->orderBy('id','DESC')
+                    ->take(10)
+                    ->get();
+        }
 
         return response()->json(['trips' => $this->formatTrips($trips, $lang)], 200);
     }
