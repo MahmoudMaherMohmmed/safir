@@ -34,7 +34,7 @@ class BankTransferController extends Controller
 
     public function index()
     {
-        $bank_transfers = BankTransfer::all();
+        $bank_transfers = BankTransfer::latest()->get();
         return view('bank_transfer.index', compact('bank_transfers'));
     }
 
