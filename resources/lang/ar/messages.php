@@ -366,7 +366,7 @@ return [
     'reservations'=>[
         'reservations' => 'الحجوزات',
         'create_reservation' => 'حجز رحلة',
-        'client_name' => 'أسم المريض',
+        'client_name' => 'أسم العميل',
         'trip_name' => 'عنوان الرحله',
     ],
 
