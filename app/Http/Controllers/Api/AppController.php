@@ -191,5 +191,26 @@ class AppController extends Controller
 
         return response()->json(['message' => 'language changed successfully.'], 200);
     }
+
+    public function sliders(Request $request)
+    {
+        $sliders = $this->formateSliders(Slider::get(), $request->lang);
+
+        return response()->json(['sliders' => $sliders]);
+    }
+
+    private function formateSliders($sliders, $lang){
+        $sliders_array = [];
+
+        foreach($sliders as $slider){
+            array_push($sliders_array, [
+                'id' => $slider->id,
+                'title' => isset($lang) && $lang!=null ? $slider->getTranslation('title', $lang) : $slider->title,
+                'image' => url($slider->image)
+            ]);
+        }
+
+        return $sliders_array;
+    }
     
 }

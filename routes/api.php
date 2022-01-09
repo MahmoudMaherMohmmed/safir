@@ -30,6 +30,7 @@ Route::middleware('localization')->group(function () {
     Route::get('trip/countries', 'Api\TripController@countries');
     Route::get('trip/{id}/show', 'Api\TripController@show');
     Route::get('countries', 'Api\AppController@countries');
+    Route::get('sliders', 'Api\AppController@sliders');
     Route::get('media', 'Api\MediaController@index');
     Route::post('media/views/update', 'Api\MediaController@updateViews');
     Route::get('banks', 'Api\BankController@index');
