@@ -39,10 +39,12 @@ class CategoryController extends Controller
         if($country_id != 0){
             $trips = Trip::where('category_id', $category_id)
                         ->where('country_id', $country_id)
+                        ->latest()
                         ->get();
         }else{
             $trips = Trip::where('category_id', $category_id)
                     ->orderBy('id','DESC')
+                    ->latest()
                     ->take(10)
                     ->get();
         }

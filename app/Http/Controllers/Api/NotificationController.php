@@ -17,7 +17,7 @@ class NotificationController extends Controller
         $client = Client::where('id', $client_id)->first();
         $notifications = [];
         if(isset($client) && $client!=null){
-            $notifications = $this->formatNotifications($client->notifications);
+            $notifications = $this->formatNotifications($client->notifications->latest());
         }
 
         return response()->json(['notifications' => $notifications], 200);

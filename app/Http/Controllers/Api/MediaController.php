@@ -10,7 +10,7 @@ class MediaController extends Controller
 {
     public function index(Request $request)
     {
-        $media = Media::all();
+        $media = Media::latest()->get();
         
         return response()->json(['media' => $this->formatMedia($media, $request->lang)], 200);
     }

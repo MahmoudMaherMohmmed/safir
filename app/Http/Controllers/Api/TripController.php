@@ -66,7 +66,7 @@ class TripController extends Controller
         $client_id = $request->user()->id;
         $reservations_array = [];
 
-        $reservations = Reservation::where('client_id', $client_id)->get();
+        $reservations = Reservation::where('client_id', $client_id)->latest()->get();
         if(isset($reservations) && $reservations!=null){
             foreach($reservations as $reservation){
                 if((isset($reservation->trip) && $reservation->trip!=null) && $reservation->trip->to >= date('Y-m-d'))
@@ -83,7 +83,7 @@ class TripController extends Controller
         $client_id = $request->user()->id;
         $reservations_array = [];
 
-        $reservations = Reservation::where('client_id', $client_id)->where('status', '!=', 1)->get();
+        $reservations = Reservation::where('client_id', $client_id)->where('status', '!=', 1)->latest()->get();
         if(isset($reservations) && $reservations!=null){
             foreach($reservations as $reservation){
                 if((isset($reservation->trip) && $reservation->trip!=null) && $reservation->trip->to < date('Y-m-d'))
@@ -196,7 +196,7 @@ class TripController extends Controller
         $client_id = $request->user()->id;
         $special_trips_array = [];
 
-        $special_trips = specialTrip::where('client_id', $client_id)->get();
+        $special_trips = specialTrip::where('client_id', $client_id)->latest()->get();
         if(isset($special_trips) && $special_trips!=null){
             foreach($special_trips as $trip){
                 if($this->specialTripEndDate($trip) >= date('Y-m-d')){
@@ -220,7 +220,7 @@ class TripController extends Controller
         $client_id = $request->user()->id;
         $special_trips_array = [];
 
-        $special_trips = specialTrip::where('client_id', $client_id)->where('status', '!=', 1)->get();
+        $special_trips = specialTrip::where('client_id', $client_id)->where('status', '!=', 1)->latest()->get();
         if(isset($special_trips) && $special_trips!=null){
             foreach($special_trips as $trip){
                 if($this->specialTripEndDate($trip) < date('Y-m-d')){

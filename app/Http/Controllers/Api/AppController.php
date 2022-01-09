@@ -114,6 +114,7 @@ class AppController extends Controller
                         ->where('tans_bodies.body', 'Like', '%'.$key.'%')
                         ->orWhere('countries.title', 'Like', '%'.$key.'%')
                         ->groupBy(['countries.id'])
+                        ->latest()
                         ->get(['countries.id']);
 
         if(isset($countries) && $countries!=null && count($countries)>0){
@@ -127,6 +128,7 @@ class AppController extends Controller
                         ->where('tans_bodies.body', 'Like', '%'.$key.'%')
                         ->orWhere('trips.name', 'Like', '%'.$key.'%')
                         ->groupBy(['trips.id'])
+                        ->latest()
                         ->get(['trips.id']);
 
             if(isset($trips) && $trips!=null && count($trips)>0){
