@@ -394,6 +394,7 @@ return [
         'status' => 'Status',
         'gallery' => 'Gallery',
         'upload_to_gallery' => 'Upload To Gallery',
+        'created_at'=> 'Created at',
     ],
 
     'special_trips'=>[

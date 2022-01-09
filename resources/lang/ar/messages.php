@@ -388,6 +388,7 @@ return [
         'status' => 'الحاله',
         'gallery' => 'معرض الصور',
         'upload_to_gallery' => 'رفع الى معرض الصور',
+        'created_at' => 'تاؤيخ ارسال الطلب',
     ],
 
     'special_trips'=>[
