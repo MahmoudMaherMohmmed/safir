@@ -25,7 +25,7 @@
     <div class="col-sm-9 col-lg-10 controls">
       <select class="form-control chosen-rtl" name="category_id" required>
         @foreach($categories as $category)
-        <option value="{{$category->id}}" {{$trip && $trip->category_id==$category->id ? 'selected' : '' }}>{{$category->title}}</option>
+        <option value="{{$category->id}}" {{$trip && $trip->category_id==$category->id ? 'selected' : '' }}>{{$category->getTranslation('title', Session::get('applocale'))}}</option>
         @endforeach
       </select>
     </div>
@@ -36,7 +36,7 @@
     <div class="col-sm-9 col-lg-10 controls">
       <select class="form-control chosen-rtl" name="country_id" required>
         @foreach($countries as $country)
-        <option value="{{$country->id}}" {{$trip && $trip->country_id==$country->id ? 'selected' : '' }}>{{$country->title}}</option>
+        <option value="{{$country->id}}" {{$trip && $trip->country_id==$country->id ? 'selected' : '' }}>{{$country->getTranslation('title', Session::get('applocale'))}}</option>
         @endforeach
       </select>
     </div>
