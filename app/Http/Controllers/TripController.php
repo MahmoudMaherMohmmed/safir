@@ -38,7 +38,7 @@ class TripController extends Controller
 
     public function index()
     {
-        $trips = Trip::all();
+        $trips = Trip::latest()->get();
         $languages = $this->languageRepository->all();
         return view('trip.index', compact('trips', 'languages'));
     }
