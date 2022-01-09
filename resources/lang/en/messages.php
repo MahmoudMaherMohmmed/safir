@@ -464,5 +464,10 @@ return [
         'title' => 'Title',
         'body' => 'Body',
     ],
+
+    'sliders'=>[
+        'sliders' => 'Sliders',
+        'create_slider' => 'Create Slider',
+    ],
     
 ];
