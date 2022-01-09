@@ -64,7 +64,6 @@ class SliderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'array',
-            'title.*' => 'string',
             'image' => 'required'
         ]);
 
@@ -131,7 +130,6 @@ class SliderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'array',
-            'title.*' => 'string',
             'image' => ''
         ]);
 
