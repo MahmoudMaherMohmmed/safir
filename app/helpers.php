@@ -102,6 +102,7 @@ function get_static_routes()
         Route::Resource('bank', 'BankController');
         Route::Resource('bank_transfer', 'BankTransferController');
         Route::Resource('notification', 'NotificationController');
+        Route::Resource('slider', 'SliderController');
     });
 
 
