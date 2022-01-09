@@ -86,7 +86,10 @@ class SliderController extends Controller
         }
 
         foreach ($request->title as $key => $value) {
-            $slider->setTranslation('title', $key, $value);
+            if($value!=null)
+            {
+                $slider->setTranslation('title', $key, $value);
+            }
         }
         
         $slider->save();
@@ -156,7 +159,10 @@ class SliderController extends Controller
         }
 
         foreach ($request->title as $key => $value) {
-            $slider->setTranslation('title', $key, $value);
+            if($value!=null)
+            {
+                $slider->setTranslation('title', $key, $value);
+            }
         }
         
         $slider->save();
