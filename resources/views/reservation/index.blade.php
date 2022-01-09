@@ -38,6 +38,7 @@
                                             <th>@lang('messages.name')</th>
                                             <th>@lang('messages.trips.name')</th>
                                             <th>@lang('messages.trips.payment_type')</th>
+                                            <th>@lang('messages.trips.created_at')</th>
                                             <th>@lang('messages.trips.status')</th>
                                             <th>@lang('messages.action')</th>
                                         </tr>
@@ -51,6 +52,7 @@
                                                 <td> {{ $value->client->name }} </td>
                                                 <td> {{ $value->trip->getTranslation('name', Session::get('applocale')) }} </td>
                                                 <td> {{ $value->bankTransfer!=null ? ($value->payment_type==0 ? 'تحويل بنكى' : 'دفع الالكترونى') : '---'}} </td>
+                                                <td> {{$value->created_at->format('dd/mm/yyyy')}} </td>
                                                 <td>
                                                     @if($value->status==2)
                                                         تم الموافقه عليه
