@@ -19,7 +19,7 @@ class SpecialTripController extends Controller
 
     public function index()
     {
-        $special_trips = SpecialTrip::all();
+        $special_trips = SpecialTrip::latest()->get();
         return view('special_trip.index', compact('special_trips'));
     }
 
