@@ -14,10 +14,10 @@ class NotificationController extends Controller
     public function index(Request $request){
         $client_id = $request->user()->id;
         
-        $client = Client::where('id', $client_id)->first();
+        $client_notifications = Notification::where('client_id', $client_id)->orderBy('id', 'DESC')->get();
         $notifications = [];
-        if(isset($client) && $client!=null){
-            $notifications = $this->formatNotifications($client->notifications);
+        if(isset($client_notifications) && $client_notifications!=null){
+            $notifications = $this->formatNotifications($client_notifications);
         }
 
         return response()->json(['notifications' => $notifications], 200);
