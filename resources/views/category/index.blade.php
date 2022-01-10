@@ -42,6 +42,7 @@
                                             <th>id</th>
                                             <th>@lang('messages.Title')</th>
                                             <th>@lang('messages.Image.Image')</th>
+                                            <th>@lang('messages.order')</th>
                                             <th>@lang('messages.action')</th>
                                         </tr>
                                     </thead>
@@ -90,6 +91,9 @@
                     },
                     {
                         data: 'image'
+                    },
+                    {
+                        data: 'order'
                     },
                     {
                         data: 'action',

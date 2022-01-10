@@ -295,6 +295,7 @@ return [
     'Ussd Code' => 'Ussd Code',
     'Country' => 'Country',
     'Parent Category' => 'Parent Category',
+    'order' => 'Order',
     'Edit' => 'Edit',
     'Image Preview' => 'Image Preview',
     'content' => 'content',

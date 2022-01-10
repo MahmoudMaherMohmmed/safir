@@ -29,11 +29,16 @@
     </div>
 </div>
 
-
-<br>
-<br>
-<br>
-<br>
+<div class="form-group">
+    <label class="col-sm-3 col-lg-2 control-label">@lang('messages.order')</label>
+    <div class="col-sm-9 col-lg-10 controls">
+        <select class="form-control chosen-rtl" name="order" required>
+            @for($counter=1; $counter<=count($categories); $counter++)
+                <option value="{{$counter}}" {{$category && $category->order==$counter ? 'selected' : '' }}>{{$counter}}</option>
+            @endfor
+        </select>
+    </div>
+</div>
 
 <div class="form-group">
     <label class="col-sm-3 col-md-2 control-label">@lang('messages.Image.Image') </label>

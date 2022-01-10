@@ -28,6 +28,7 @@ class CategoryRequest extends Request
             'title.*'   => 'required|string',
             'image'     => 'mimes:png,jpg,jpeg',
             'parent_id' => 'nullable|exists:categories,id',
+            'order'     => 'required',
         ];
     }
 

@@ -54,7 +54,6 @@ class CategoryService
         }
         $category = $this->transTitle($category, $request);
         $category->fill(Arr::except($request, ['title']));
-
         $category->save();
 
         return $category;

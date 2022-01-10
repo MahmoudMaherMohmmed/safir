@@ -14,7 +14,7 @@ class Category extends Model
 
     protected $table = 'categories';
 
-    protected $fillable = ['title', 'image', 'parent_id'];
+    protected $fillable = ['title', 'image', 'order', 'parent_id'];
 
     public function getImageAttribute($value)
     {

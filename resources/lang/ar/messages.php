@@ -289,6 +289,7 @@ return [
     'Ussd Code' => 'كود Ussde',
     'Country' => 'دولة',
     'Parent Category' => 'الفئة الأصلية',
+    'order' => 'الترتيب',
     'Edit' => 'تعديل',
     'Image Preview' => 'معاينة الصورة',
     'content' => 'المحتوى',

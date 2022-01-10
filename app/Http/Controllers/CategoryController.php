@@ -103,6 +103,9 @@ class CategoryController extends Controller
                     return "<img src='https://ui-avatars.com/api/?name=$category->title' alt='$category->title' style='width:100px' height='100px'>";
                 }
             })
+            ->addColumn('order', function (Category $category) {
+                return isset($category->order)&&$category->order!=null ? $category->order : '';
+            })
             ->addColumn('action', function (Category $value) {
                 return view('category.action', compact('value'))->render();
             })
@@ -121,8 +124,9 @@ class CategoryController extends Controller
         $parents = $this->categoryRepository->parent()->when(request()->category_id, function ($query) {
             return $query->where('id', request()->category_id);
         })->get();
+        $categories = $this->categoryRepository->all();
         $languages = $this->languageRepository->all();
-        return view('category.form', compact('category', 'parents', 'languages'));
+        return view('category.form', compact('category', 'categories', 'parents', 'languages'));
     }
 
     /**
@@ -147,8 +151,9 @@ class CategoryController extends Controller
     {
         $category = $this->categoryRepository->find($id);
         $parents = $this->categoryRepository->parent()->get();
+        $categories = $this->categoryRepository->all();
         $languages = $this->languageRepository->all();
-        return view('category.form', compact('category', 'parents', 'languages'));
+        return view('category.form', compact('category', 'parents', 'categories', 'languages'));
     }
 
     /**
