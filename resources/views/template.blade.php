@@ -355,7 +355,8 @@ if (Config::get('languages')[App::getLocale()] == "English") {
 
                             <!-- BEGIN Submenu -->
                             <ul class="submenu">
-                                <li id="special_trip_index"><a href="{{url('special_trip')}}">@lang('messages.special_trips.special_trips')</a></li>
+                                @php $not_viewed_special_trips = App\Models\SpecialTrip::where('viewed', 0)->count() @endphp
+                                <li id="special_trip_index"><a href="{{url('special_trip')}}">@lang('messages.special_trips.special_trips') @if($not_viewed_special_trips > 0)<span class="btn btn-success" style="border-radius: 50% !important; margin-right: 5px;">{{$not_viewed_special_trips}}</span>@endif</a></li>
                                 <li id="special_trip_create"><a href="{{url('special_trip/create')}}">@lang('messages.special_trips.create_special_trip')</a></li>
                             </ul>
                         </li>
@@ -370,7 +371,8 @@ if (Config::get('languages')[App::getLocale()] == "English") {
                             </a>
 
                             <ul class="submenu">
-                                <li id="reservation_index"><a href="{{url('reservation')}}">@lang('messages.reservations.reservations')</a></li>
+                                @php $not_viewed_reservations = App\Models\Reservation::where('viewed', 0)->count() @endphp
+                                <li id="reservation_index"><a href="{{url('reservation')}}">@lang('messages.reservations.reservations') @if($not_viewed_reservations > 0)<span class="btn btn-success" style="border-radius: 50% !important; margin-right: 5px;">{{$not_viewed_reservations}}</span>@endif</a></li>
                                 <li id="reservation_create"><a href="{{url('reservation/create')}}">@lang('messages.reservations.create_reservation')</a></li>
                             </ul>
                         </li>
