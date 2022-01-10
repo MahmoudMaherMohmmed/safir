@@ -26,6 +26,9 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = Reservation::latest()->get();
+
+        $this->updateReservationViewed();
+        
         return view('reservation.index', compact('reservations'));
     }
 
@@ -172,6 +175,18 @@ class ReservationController extends Controller
         $notification->title = $title;
         $notification->body = $body;
         $notification->save();
+
+        return true;
+    }
+
+    private function updateReservationViewed(){
+        $reservations = Reservation::where('viewed', 0)->get();
+        if(isset($reservations) && $reservations!=null){
+            foreach($reservations as $reservation){
+                $reservation->viewed = 1;
+                $reservation->save();
+            }
+        }
 
         return true;
     }

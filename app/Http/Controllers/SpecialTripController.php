@@ -20,6 +20,9 @@ class SpecialTripController extends Controller
     public function index()
     {
         $special_trips = SpecialTrip::latest()->get();
+
+        $this->updateSpecialTripViewed();
+        
         return view('special_trip.index', compact('special_trips'));
     }
 
@@ -179,6 +182,18 @@ class SpecialTripController extends Controller
         $notification->title = $title;
         $notification->body = $body;
         $notification->save();
+
+        return true;
+    }
+
+    private function updateSpecialTripViewed(){
+        $special_trips = SpecialTrip::where('viewed', 0)->get();
+        if(isset($special_trips) && $special_trips!=null){
+            foreach($special_trips as $special_trip){
+                $special_trip->viewed = 1;
+                $special_trip->save();
+            }
+        }
 
         return true;
     }

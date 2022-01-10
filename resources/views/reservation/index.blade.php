@@ -73,7 +73,7 @@
                                                             @php $bank_transfer = $value->bankTransfer @endphp
                                                             <a class="btn btn-sm btn-success show-tooltip"
                                                                 href='{{ url("bank_transfer/$bank_transfer->id") }}'
-                                                                title="Edit"><i class="fa fa-eye"></i></a>
+                                                                title="View"><i class="fa fa-eye"></i></a>
                                                         @endif
                                                         <form action="{{ route('reservation.destroy', $value->id) }}"
                                                             method="POST" style="display: initial;">
