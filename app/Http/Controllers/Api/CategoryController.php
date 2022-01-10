@@ -14,7 +14,7 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = $this->formatCategories(Category::get(), $request->lang);
+        $categories = $this->formatCategories(Category::orderBy('order', 'ASC')->get(), $request->lang);
 
         return response()->json(['categories' => $categories], 200);
     }
