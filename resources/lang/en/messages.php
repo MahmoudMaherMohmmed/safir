@@ -463,6 +463,7 @@ return [
         'client_name' => 'Client Name',
         'title' => 'Title',
         'body' => 'Body',
+        'all' => 'Send to all',
     ],
 
     'sliders'=>[

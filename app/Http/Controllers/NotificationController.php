@@ -52,8 +52,12 @@ class NotificationController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        Notification::create( $request->all() );
-        $this->sendNotification($request);
+        if($request->client_id != 0){
+            Notification::create( $request->all() );
+            $this->sendNotification($request);
+        }else{
+            $this->sendNotificationToAllClients($request);
+        }
 
         \Session::flash('success', trans('messages.Added Successfully'));
 
@@ -117,6 +121,27 @@ class NotificationController extends Controller
                 "title" => $request->title, 
                 "body" => $request->body
               ));
+        }
+
+        return true;
+    }
+
+    private function sendNotificationToAllClients($request){
+        $clients = Client::all();
+        
+        foreach($clients as $client){
+            if(isset($client->device_token) && $client->device_token!=null){
+                $notification = new Notification();
+                $notification->client_id = $client->id;
+                $notification->title = $request->title;
+                $notification->body = $request->body;
+                $notification->save();
+
+                sendNotification($client->device_token, array(
+                    "title" => $request->title, 
+                    "body" => $request->body
+                  ));
+            }
         }
 
         return true;
