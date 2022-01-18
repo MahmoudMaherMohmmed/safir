@@ -162,6 +162,25 @@ class ClientController extends Controller
         return $user;
     }
 
+    public function verifyPhone(Request $request){
+        $Validated = Validator::make($request->all(), [
+            'phone' => 'required',
+        ]);
+
+        if($Validated->fails())
+            return response()->json($Validated->messages(), 403);
+
+        $client = Client::where('phone', $request->phone)->first();
+        if ($client) {
+            $token = $client->createToken('API')->accessToken;
+
+            return response(['token' => $token], 200);
+        } else {
+            return response(["message" => trans('api.user_does_not_exist')], 403);
+        }
+            
+    }
+
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();

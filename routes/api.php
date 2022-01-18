@@ -36,6 +36,7 @@ Route::middleware('localization')->group(function () {
     Route::get('banks', 'Api\BankController@index');
     Route::get('search/{key}', 'Api\AppController@search');
     Route::post('language/update', 'Api\AppController@changeLanguage');
+    Route::post('verify_phone', 'Api\ClientController@verifyPhone');
 
     Route::middleware('auth:api')->group(function () {
         Route::get('profile', 'Api\ClientController@profile');
