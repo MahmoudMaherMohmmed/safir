@@ -43,6 +43,7 @@ Route::middleware('localization')->group(function () {
         Route::post('profile/update', 'Api\ClientController@UpdateProfile');
         Route::post('profile/update/image', 'Api\ClientController@updateProfileImage');
         Route::post('profile/update_password', 'Api\ClientController@updatePassword');
+        Route::post('profile/reset_password', 'Api\ClientController@resetPassword');
         Route::post('logout', 'Api\ClientController@logout');
         Route::post('special_trip', 'Api\TripController@specialTrip');
         route::get('client/special_trip/reservation/current', 'Api\TripController@specialTripClientCurrentReservations');

@@ -181,6 +181,29 @@ class ClientController extends Controller
             
     }
 
+    public function resetPassword(Request $request){
+        $Validated = Validator::make($request->all(), [
+            'new_password'  => 'required|min:6',
+        ]);
+
+        if($Validated->fails())
+            return response()->json($Validated->messages(), 403);
+
+        $client = $request->user();
+        if ($client) {
+            $request->user()->token()->revoke();
+
+            $update_client = Client::where('id', $client->id)->first();
+            $update_client->password = $request->new_password;
+            $update_client->save();
+
+            return response(["message" => trans('api.password_changed_successfully')], 200);
+        } else {
+            $response = ["message" => trans('api.user_does_not_exist')];
+            return response($response, 403);
+        }
+    }
+
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
