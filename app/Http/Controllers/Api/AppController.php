@@ -223,8 +223,8 @@ class AppController extends Controller
 
         if($Validated->fails())
             return response()->json($Validated->messages(), 403);
-
-        return response()->json(['message' => trans('api.verify_code')], 200);
+            
+        return response()->json(['token' => request()->bearerToken()], 200);
     }
     
 }
