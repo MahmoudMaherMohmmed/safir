@@ -51,5 +51,6 @@ Route::middleware('localization')->group(function () {
         route::get('client/trip/reservation/finished', 'Api\TripController@clientFinishedReservations');
         Route::get('notifications', 'Api\NotificationController@index');
         Route::post('notification/delete', 'Api\NotificationController@delete');
+        Route::post('verify_code', 'Api\AppController@verifyCode');
     });
 });

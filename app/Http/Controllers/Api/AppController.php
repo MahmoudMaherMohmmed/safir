@@ -215,5 +215,16 @@ class AppController extends Controller
 
         return $sliders_array;
     }
+
+    public function verifyCode(Request $request){
+        $Validated = Validator::make($request->all(), [
+            'code' => 'required',
+        ]);
+
+        if($Validated->fails())
+            return response()->json($Validated->messages(), 403);
+
+        return response()->json(['message' => trans('api.verify_code')], 200);
+    }
     
 }

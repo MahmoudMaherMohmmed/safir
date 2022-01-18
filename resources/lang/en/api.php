@@ -8,4 +8,5 @@ return [
     'logout' => 'Successfully logged out.',
     'send_successfully' => 'Your Message Sent Successfully',
     'miss_configration' => 'No Contact Mail is configured',
+    'verify_code' => 'Your account has been successfully activated.',
 ];
